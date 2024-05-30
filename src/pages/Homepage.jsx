@@ -1,4 +1,4 @@
-import EventGrid; from "../components/EventGrid"
+import EventGrid from "../components/EventGrid";
 
 //Functions:
 
