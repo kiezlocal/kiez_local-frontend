@@ -12,7 +12,7 @@ return(
 
         </header>
 {/* Import searchbar here */}
-<PhotoGrid />
+<EventGrid />
 
     </div>
 )

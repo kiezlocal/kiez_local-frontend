@@ -1,27 +1,28 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import {Route, Routes} from "react-router-dom";
-import Kiez from "./pages/Kiez";
-import KiezDetails from "./pages/KiezDetails";
-import EventDetails from "./pages/EventDetails"
+// import { useState } from 'react'
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import Homepage from './pages/Homepage';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   
 
   return (
     <>
-      <Header/>
-
+      <Navbar/>
+<Router>
+<div>
 <Routes>
-      <Route path="/"> </Route>
-      <Route path="/kiezs" element={<Kiez/>}></Route>
+      <Route path="/" element={<Homepage />}/>
+      {/* <Route path="/kiezs" element={<Kiez/>}></Route>
       <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
       <Route path="/events/:eventId" element={<EventDetails/>}></Route>
-      <Route path="/about" element= {<About/>}></Route>
+      <Route path="/about" element= {<About/>}></Route> */}
       {/* <Route path="*" element= {<NotFound/>}></Route> */}
       
 </Routes>
+</div>
+</Router>
 
       <Footer/>
 </>
