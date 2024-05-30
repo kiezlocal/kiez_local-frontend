@@ -1,0 +1,44 @@
+.event-details-container {
+    display: flex;
+    margin: 20px;
+  }
+  
+  .event-image {
+    width: 40%;
+    height: auto;
+  }
+  
+  .event-details {
+    margin-left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .event-name {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 36px;
+    font-weight: bold;
+    line-height: 110%;
+    color: #333333;
+  }
+  
+  .event-category {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 20px;
+    font-weight: regular;
+    line-height: 110%;
+    color: #6F6F6F;
+  }
+  
+  .event-datetime,
+  .event-location,
+  .event-district,
+  .event-description {
+    margin-top: 10px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
+    line-height: 110%;
+    color: #333333;
+  }
+  
