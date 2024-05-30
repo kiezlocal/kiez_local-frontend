@@ -1,8 +1,9 @@
+// src/pages/EventDetail.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './EventDetails.css';
+import './EventDetail.css';
 
-const EventDetails = () => {
+const EventDetail = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
 
@@ -25,18 +26,17 @@ const EventDetails = () => {
   }
 
   return (
-    <div className="event-details-container">
+    <div className="event-detail-container">
       <img src={event.image} alt={event.name} className="event-image" />
       <div className="event-details">
         <h1 className="event-name">{event.name}</h1>
         <p className="event-category">{event.category}</p>
-        <p className="event-datetime">{event.dateTime}</p>
-        <p className="event-location">{event.location}</p>
-        <p className="event-district">{event.district}</p>
+        <p className="event-datetime">{new Date(event.date).toLocaleString()}</p>
+        <p className="event-location">{event.address}</p>
         <p className="event-description">{event.description}</p>
       </div>
     </div>
   );
 };
 
-export default EventDetails;
+export default EventDetail;
