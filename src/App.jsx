@@ -2,7 +2,6 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import {Route, Routes} from "react-router-dom";
-import "/App.css";
 import Kiez from "./pages/Kiez";
 import KiezDetails from "./pages/KiezDetails";
 import EventDetails from "./pages/EventDetails"
