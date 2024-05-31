@@ -4,6 +4,7 @@ import Homepage from './pages/Homepage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import About from './pages/About';
+import Register from './pages/Register';
 import KiezGrid from './pages/Kiez';
 
 
@@ -17,7 +18,8 @@ function App() {
 <div>
 <Routes>
       <Route path="/" element={<Homepage />}/>
-      <Route path="/about" element= {<About/>}></Route>
+      <Route path="/about" element= {<About/>}></Route> 
+      <Route path="/register" element= {<Register/>}></Route> 
       <Route path='/kiez' element= {<KiezGrid />}></Route>
       {/* <Route path="/kiezs" element={<Kiez/>}></Route>
       <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
