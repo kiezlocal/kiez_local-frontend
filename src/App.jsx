@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Homepage from './pages/Homepage';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import About from './pages/About';
+import Register from './pages/Register';
 
 
 function App() {
@@ -15,6 +17,8 @@ function App() {
 <div>
 <Routes>
       <Route path="/" element={<Homepage />}/>
+      <Route path="/about" element= {<About/>}></Route> 
+      <Route path="/register" element= {<Register/>}></Route> 
       {/* <Route path="/kiezs" element={<Kiez/>}></Route>
       <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
       <Route path="/events/:eventId" element={<EventDetails/>}></Route>
