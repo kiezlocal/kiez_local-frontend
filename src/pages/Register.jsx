@@ -25,19 +25,26 @@ const Register = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:5005/api/register', {
+      console.log('Submitting form:', formDetails);
+      const response = await fetch('http://localhost:5005/auth/signup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify(formDetails)
+        body: JSON.stringify({
+          email: formDetails.email,
+          password: formDetails.password,
+          name: formDetails.username
+        })
       });
 
       if (response.ok) {
         alert('Registration successful');
         navigate('/login');
       } else {
-        alert('Registration failed');
+        const errorData = await response.json();
+        alert(`Registration failed: ${errorData.message}`);
+        console.error('Registration error:', errorData);
       }
     } catch (error) {
       console.error('Error registering:', error);
