@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
-import axios from 'axios';
+// import axios from 'axios';
 import "../App.css";
 
 
 
 export default function SearchBar({activateSearch}){
-    const [searchInfo, setSearch] = useState({category: ''});
+    const [searchInfo, setSearch] = useState({category: '', kiez: '', time: ''});
 
 
 function handleSubmitSearch(e) {
@@ -14,7 +14,15 @@ function handleSubmitSearch(e) {
   }
 
 function handleInputCategory(e) {
-    setSearch({ category: e.target.value });
+    setSearch(prevState => ({ ...prevState, category: e.target.value }));
+}
+
+function handleInputKiez(e) {
+    setSearch(prevState => ({ ...prevState, kiez: e.target.value }));
+}
+
+function handleInputTime(e) {
+    setSearch(prevState => ({ ...prevState, time: e.target.value }));
 }
 
 return(
@@ -22,7 +30,7 @@ return(
             <div id="filter-search-options">
                 <label htmlFor="category-select">Category</label>
                 <select id="category-select" value={searchInfo.category} onChange={handleInputCategory}>
-                    <option value="">Select a category</option>
+                    <option value="">All</option>
                     <option value="Music">Music</option>
                     <option value="Art">Art</option>
                     <option value="Local markets">Local markets</option>
@@ -35,7 +43,41 @@ return(
                 </select>
             </div>
             <button type="submit">Search</button>
+
+            <div id="filter-search-options">
+                <label htmlFor="kiez-select">Neighbourhood</label>
+                <select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez}>
+                    <option value="">All</option>
+                    <option value="Pankow">Pankow</option>
+                    <option value="Mitte">Mitte</option>
+                    <option value="Reinkendorf">Reinkendorf</option>
+                    <option value="Spandau">Spandau</option>
+                    <option value="Charlottenburg-Wilmersdorf">Charlottenburg-Wilmersdorf</option>
+                    <option value="Steglitz-Zehlendorf">Steglitz-Zehlendorf</option>
+                    <option value="Tempelhof-Schöneberg">Tempelhof-Schöneberg</option>
+                    <option value="Neukölln">Neukölln</option>
+                    <option value="Friedrichshain-Kreuzberg">Friedrichshain-Kreuzberg</option>
+                    <option value="Lichtenberg">Lichtenberg</option>
+                    <option value="Marzahn-Hellersdorf">Marzahn-Hellersdorf</option>
+                    <option value="Treptow-Köpenick">Treptow-Köpenick</option>
+                </select>
+            </div>
+
+            <div id="filter-search-options">
+                <label htmlFor="time-select">Time</label>
+                <select id="time-select" value={searchInfo.time} onChange={handleInputTime}>
+                <option value="">All</option>
+                <option value="Next 3 days">Next 3 days</option>
+                <option value="Next 7 days">Next 7 days</option>
+                <option value="Next month">Next month</option>
+                </select>
+            </div>
+            <button type='submit'>Search</button>
+
+
         </form>
+
+    
 )
 
 }
