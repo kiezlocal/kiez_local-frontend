@@ -6,6 +6,8 @@ import Footer from './components/Footer';
 import About from './pages/About';
 import Register from './pages/Register';
 import KiezGrid from './pages/Kiez';
+import EditEventForm from './pages/EditEventForm';
+import EditKiezForm from './pages/EditKiezForm';
 
 
 function App() {
@@ -20,7 +22,6 @@ function App() {
       <Route path="/" element={<Homepage />}/>
       <Route path="/about" element= {<About/>}></Route> 
       <Route path="/register" element= {<Register/>}></Route> 
-      <Route path='/kiez' element= {<KiezGrid />}></Route>
       {/* <Route path="/kiezs" element={<Kiez/>}></Route>
       <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
       <Route path="/events/:eventId" element={<EventDetails/>}></Route>
