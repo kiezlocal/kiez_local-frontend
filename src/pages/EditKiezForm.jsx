@@ -13,14 +13,16 @@ const EditKiezForm = () => {
     const { kiezId } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/api/kiez/${kiezId}`)
-            .then(response => {
-                setFormDetails(response.data);
-            })
-            .catch(error => {
-                console.error("Error while fetching kiez information.", error);
-            });
-    }, [kiezId]);
+    axios.get(`http://localhost:5005/api/kiez/${kiezId}`)
+        .then(response => {
+            const { kiezName, description, image } = response.data;
+            setFormDetails({ kiezName, description, image });
+        })
+        .catch(error => {
+            console.error("Error while fetching kiez information.", error);
+        });
+}, [kiezId]);
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
