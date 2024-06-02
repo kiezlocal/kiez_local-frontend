@@ -2,14 +2,16 @@ import EventGrid from "../components/EventGrid";
 import SearchBar from "../components/Searchbar";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AddEventForm from "./AddEventForm";
 //Functions:
 
 
 
-//Return:
 const Homepage = () => {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
+    const [displayNewEvent, setDisplayNewEvent] = useState(false);
+    const [displayAllEvents, setDisplayAllEvents] = useState(false);
 
     useEffect(() => {
         axios.get('http://localhost:5005/api/events')
@@ -52,6 +54,10 @@ const Homepage = () => {
         setFilteredEvents(filtered);
     };
 
+    const handleEventAdded = (newEvent) => {
+        setEvents(prevEvents => [...prevEvents, newEvent]);
+        setFilteredEvents(prevEvents => [...prevEvents, newEvent]);
+    }
     
 return(
     <div>
@@ -60,6 +66,13 @@ return(
         </header>
 <SearchBar activateSearch={activateSearch} />
 <EventGrid events={filteredEvents}/>
+<AddEventForm onEventAdded={handleEventAdded} />
+
+{displayNewEvent &&
+<AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
+}
+
+{/* here to add displayeditform */}
 
     </div>
 )

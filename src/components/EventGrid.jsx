@@ -5,21 +5,7 @@ import "../App.css";
 
 
 const EventGrid = ({events}) => {
-    // const [eventPhoto, setEvent] = useState([]);
-
-    // useEffect(() => {
-    //     axios.get('http://localhost:5005/api/events')
-    //     .then(response => {
-    //         console.log(response.data); 
-    //         setEvent(response.data);
-    //     })
-    //     .catch(error => {
-    //         console.error("Error while fetching events information.", error);
-    //     });
-    // }, []);
-
-
-
+   
     return(
         <div>
             {events.map(event => (
