@@ -42,7 +42,7 @@ return(
                     <option value="Other">Other</option>
                 </select>
             </div>
-            <button type="submit">Search</button>
+            
 
             <div id="filter-search-options">
                 <label htmlFor="kiez-select">Neighbourhood</label>

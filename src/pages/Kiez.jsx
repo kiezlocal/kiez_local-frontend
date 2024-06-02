@@ -23,8 +23,8 @@ return(
     <div>
         {kiezPhoto.map(kiez => (
             <div key={kiez._id}>
-               <img src={kiez.image} alt={kiez.name} className='kiez-list-photo'/>
-               <h2>{kiez.name}</h2>
+               <img src={kiez.image} alt={kiez.kiezName} className='kiez-list-photo'/>
+               <h2>{kiez.kiezName}</h2>
             </div>
         ))}
     </div>

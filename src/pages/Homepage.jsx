@@ -49,7 +49,8 @@ const Homepage = () => {
                 filtered = filtered.filter(event => new Date(event.date) <= nextMonth);
             }
         }
-    }
+        setFilteredEvents(filtered);
+    };
 
     
 return(

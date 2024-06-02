@@ -22,9 +22,9 @@ function App() {
       <Route path="/" element={<Homepage />}/>
       <Route path="/about" element= {<About/>}></Route> 
       <Route path="/register" element= {<Register/>}></Route> 
-      {/* <Route path="/kiezs" element={<Kiez/>}></Route>
-      <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
-      <Route path="/events/:eventId" element={<EventDetails/>}></Route>
+      <Route path="/kiez" element={<KiezGrid/>}></Route>
+      {/* <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
+      <Route path="/events/:eventId" element={<EventDetails/>}></Route> */}
       
       {/* <Route path="*" element= {<NotFound/>}></Route> */}
       
