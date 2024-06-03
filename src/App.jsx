@@ -9,6 +9,7 @@ import Login from './pages/Login';
 import KiezGrid from './pages/Kiez';
 import EditEventForm from './pages/EditEventForm';
 import EditKiezForm from './pages/EditKiezForm';
+import EventDetails from './pages/EventDetails';
 import Imprint from './pages/Imprint';
 import TermsOfUse from './pages/TermsOfUse';
 
@@ -28,11 +29,11 @@ function App() {
       <Route path="/kiez" element={<KiezGrid/>}></Route>
       <Route path="/imprint" element={<Imprint />} />
       <Route path="/terms" element={<TermsOfUse />} />
+      <Route path="/events/:eventId" element={<EventDetails/>}></Route>
       <Route path="/events/:eventId/edit" element={<EditEventForm />} />
       <Route path="/kiezs/:kiezId/edit" element={<EditKiezForm />} />
+
       {/* <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
-      <Route path="/events/:eventId" element={<EventDetails/>}></Route> */}
-      
       {/* <Route path="*" element= {<NotFound/>}></Route> */}
       
 </Routes>
