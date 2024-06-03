@@ -3,6 +3,8 @@ import SearchBar from "../components/Searchbar";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddEventForm from "./AddEventForm";
+import { useNavigate } from 'react-router-dom';
+
 //Functions:
 
 
@@ -14,6 +16,8 @@ const Homepage = () => {
 
     const [displayNewEvent, setDisplayNewEvent] = useState(false);
     const [displayAllEvents, setDisplayAllEvents] = useState(false);
+    const navigate = useNavigate();
+
 
     useEffect(() => {
         Promise.all([
@@ -65,29 +69,27 @@ const Homepage = () => {
         setEvents(prevEvents => [...prevEvents, newEvent]);
         setFilteredEvents(prevEvents => [...prevEvents, newEvent]);
     }
-
+    
     const handleDelete = (eventId) => {
         axios.delete(`http://localhost:5005/api/events/${eventId}`)
             .then(() => {
-                handleEventDeleted(eventId);
+                setEvents(prevEvents => prevEvents.filter(event => event._id !== eventId));
+                setFilteredEvents(prevEvents => prevEvents.filter(event => event._id !== eventId));
             })
             .catch(error => {
                 console.error("Error while deleting event.", error);
             });
-    }
+    };
 
-
+    
 return(
     <div>
         <header>
 
         </header>
 <SearchBar activateSearch={activateSearch} />
-<EventGrid events={filteredEvents}/>
-<AddEventForm onEventAdded={handleEventAdded} />
 <EventGrid events={filteredEvents} onDelete={handleDelete} />
-
-
+<AddEventForm onEventAdded={handleEventAdded} />
 {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
 }
