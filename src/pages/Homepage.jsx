@@ -65,7 +65,18 @@ const Homepage = () => {
         setEvents(prevEvents => [...prevEvents, newEvent]);
         setFilteredEvents(prevEvents => [...prevEvents, newEvent]);
     }
-    
+
+    const handleDelete = (eventId) => {
+        axios.delete(`http://localhost:5005/api/events/${eventId}`)
+            .then(() => {
+                handleEventDeleted(eventId);
+            })
+            .catch(error => {
+                console.error("Error while deleting event.", error);
+            });
+    }
+
+
 return(
     <div>
         <header>
@@ -74,6 +85,8 @@ return(
 <SearchBar activateSearch={activateSearch} />
 <EventGrid events={filteredEvents}/>
 <AddEventForm onEventAdded={handleEventAdded} />
+<EventGrid events={filteredEvents} onDelete={handleDelete} />
+
 
 {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />

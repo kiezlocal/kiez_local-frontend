@@ -1,10 +1,13 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import "../App.css";
+import { useNavigate } from 'react-router-dom';
 
 
 
-const EventGrid = ({events}) => {
+const EventGrid = ({ events, onDelete }) => {
+    console.log(typeof onDelete);
+    const navigate = useNavigate(); 
    
     return(
         <div>
@@ -16,6 +19,10 @@ const EventGrid = ({events}) => {
                    <p>{event.address}</p>
                    <p>{event.kiez}</p>
                     {/* <p>how to get kiez?</p> */}
+                    <div>
+                    <button onClick={() => navigate(`/events/${event._id}/edit`)}>Edit</button>
+                    <button onClick={() => onDelete(event._id)}>Delete</button>
+                    </div>
                 </div>
             ))}
         </div>
