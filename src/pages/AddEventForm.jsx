@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 
 
 
-const AddEventForm = ({onEventAdded}) => {
+const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
     const [eventData, setEventData] = useState({
         name: "",
         date: "",
@@ -11,25 +11,41 @@ const AddEventForm = ({onEventAdded}) => {
         description: "",
         image: "",
         category: "",
-        kiezId: ""
+        kiez: kiezOptions.length > 0 ? kiezOptions[0]._id : '',
     });
 
 
-function handleChange(e) {
+useEffect(() => {
+    axios.get('http://localhost:5005/api/events')
+    .then(response => {
+        setKiezOptions(response.data);
+        if (response.data.length > 0){
+            setEventData(prevData => ({...prevData, kiez:response.data[0]._id}));
+        }
+    })
+    .catch(error => {
+        console.error("Error fetching kiez options", error);
+    })
+}, []);
+
+
+const handleChange = (e) => {
     const {name, value} = e.target;
     setEventData({...eventData, [name]:value});
 };
 
-function handleImageUpload(){
-    console.log("logic to upload the image");
-}
+// function handleImageUpload(){
+//     console.log("logic to upload the image");
+// }
 
 const handleSubmit = (e) => {
     e.preventDefault();
+    console.log("Submitting event data", eventData);
     axios
     .post('http://localhost:5005/api/events', eventData)
     .then(response => {
-        alert("New event added!")
+        alert("New event added!");
+        console.log("Event created", response.data);
         onEventAdded(response.data)
     })
     .catch(error => {
@@ -122,12 +138,30 @@ return(
         </select>
     </div>
     <div>
-        <label htmlFor="kiezId">Kiez</label>
-        <input type="text"
-        name="kiezId"
-        value={eventData.kiezId}
+        <label htmlFor="kiez">Kiez</label>
+        <select 
+        type="text"
+        name="kiez"
+        value={eventData.kiez}
         onChange={handleChange}
-        required />
+        required>
+        <option value="All">All</option>
+        <option value="Pankow">Pankow</option>
+        <option value="Mitte">Mitte</option>
+        <option value="Reinickendorf">Reinickendorf</option>
+        <option value="Spandau">Spandau</option>
+        <option value="Charlottenburg-Wilmersdorf">Charlottenburg-Wilmersdorf</option>
+        <option value="Steglitz-Zehlendorf">Steglitz-Zehlendorf</option>
+        <option value="Tempelhof-Schöneberg">Tempelhof-Schöneberg</option>
+        <option value="Neukölln">Neukölln</option>
+        <option value="Friedrichshain-Kreuzberg">Friedrichshain-Kreuzberg</option>
+        <option value="Lichtenberg">Lichtenberg</option>
+        <option value="Marzahn-Hellersdorf">Marzahn-Hellersdorf</option>
+        <option value="Treptow-Köpenick">Treptow-Köpenick</option>
+        <option value="Other">Other</option>  
+            {kiezOptions.map(kiez => (
+            <option key={kiez._id} value={kiez._id}>{kiez.name}</option> ))}
+            </select>
     </div>
     <button type="submit">Add Event</button>
 

@@ -10,18 +10,24 @@ import AddEventForm from "./AddEventForm";
 const Homepage = () => {
     const [events, setEvents] = useState([]);
     const [filteredEvents, setFilteredEvents] = useState([]);
+    const [kiezOptions, setKiezOptions] = useState([]);
+
     const [displayNewEvent, setDisplayNewEvent] = useState(false);
     const [displayAllEvents, setDisplayAllEvents] = useState(false);
 
     useEffect(() => {
-        axios.get('http://localhost:5005/api/events')
-            .then(response => {
-                setEvents(response.data);
-                setFilteredEvents(response.data);
-            })
-            .catch(error => {
-                console.error("Error while fetching events information.", error);
-            });
+        Promise.all([
+            axios.get('http://localhost:5005/api/events'),
+            axios.get('http://localhost:5005/api/kiez')
+        ])
+        .then(([eventsResponse, kiezResponse]) => {
+            setEvents(eventsResponse.data);
+            setFilteredEvents(eventsResponse.data);
+            setKiezOptions(kiezResponse.data);
+        })
+        .catch(error => {
+            console.error("Error while fetching events or kiez information.", error);
+        });
     }, []);
 
     const activateSearch = (searchInfo) => {
@@ -55,6 +61,7 @@ const Homepage = () => {
     };
 
     const handleEventAdded = (newEvent) => {
+        console.log("event added", newEvent);
         setEvents(prevEvents => [...prevEvents, newEvent]);
         setFilteredEvents(prevEvents => [...prevEvents, newEvent]);
     }
