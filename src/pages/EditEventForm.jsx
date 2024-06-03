@@ -6,6 +6,7 @@ const EditEventForm = () => {
     const [formDetails, setFormDetails] = useState({
         name: '',
         date: '',
+        startTime: '',
         address: '',
         description: '',
         image: '',
@@ -70,6 +71,17 @@ const EditEventForm = () => {
                         id="date"
                         name="date"
                         value={formDetails.date.split('T')[0]} 
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div className="form-group">
+                    <label htmlFor="startTime">Time</label>
+                    <input
+                        type="text"
+                        id="startTime"
+                        name="startTime"
+                        value={formDetails.startTime} 
                         onChange={handleChange}
                         required
                     />
