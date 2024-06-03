@@ -89,7 +89,7 @@ return(
         </header>
 <SearchBar activateSearch={activateSearch} />
 <EventGrid events={filteredEvents} onDelete={handleDelete} />
-<AddEventForm onEventAdded={handleEventAdded} />
+<AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />
 {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
 }

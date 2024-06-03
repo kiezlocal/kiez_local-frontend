@@ -15,51 +15,85 @@ const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
     });
 
 
-useEffect(() => {
-    axios.get('http://localhost:5005/api/events')
-    .then(response => {
-        setKiezOptions(response.data);
-        if (response.data.length > 0){
-            setEventData(prevData => ({...prevData, kiez:response.data[0]._id}));
-        }
-    })
-    .catch(error => {
-        console.error("Error fetching kiez options", error);
-    })
-}, []);
+// useEffect(() => {
+//     axios.get('http://localhost:5005/api/events')
+//     .then(response => {
+//         setKiezOptions(response.data);
+//         if (response.data.length > 0){
+//             setEventData(prevData => ({...prevData, kiez:kiezOptions[0]._id}));
+//         }
+//     }, [kiezOptions])
+//     .catch(error => {
+//         console.error("Error fetching kiez options", error);
+//     })
+// }, []);
 
+useEffect(() => {
+    if (kiezOptions.length > 0) {
+        setEventData(prevData => ({ ...prevData, kiez: kiezOptions[0]._id }));
+    }
+}, [kiezOptions]);
 
 const handleChange = (e) => {
-    const {name, value} = e.target;
-    setEventData({...eventData, [name]:value});
+    const { name, value } = e.target;
+    setEventData({ ...eventData, [name]: value });
 };
+
+
+
+// const handleChange = (e) => {
+//     const {name, value} = e.target;
+//     setEventData({...eventData, [name]:value});
+// };
 
 // function handleImageUpload(){
 //     console.log("logic to upload the image");
 // }
 
+// const handleSubmit = (e) => {
+//     e.preventDefault();
+//     console.log("Submitting event data", eventData);
+//     axios
+//     .post('http://localhost:5005/api/events', eventData)
+//     .then(response => {
+//         alert("New event added!");
+//         console.log("Event created", response.data);
+//         onEventAdded(response.data)
+//     })
+//     .catch(error => {
+//         console.error("Error while creating an event", error);
+//         if (error.response) {
+//             console.error("Response data:", error.response.data);
+//             console.error("Response status:", error.response.status);
+//             console.error("Response headers:", error.response.headers);
+//         } else if (error.request) {
+//             console.error("Request data:", error.request);
+//         } else {
+//             console.error('Error message:', error.message);
+//         }
+//     });
+// };
+
 const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Submitting event data", eventData);
-    axios
-    .post('http://localhost:5005/api/events', eventData)
-    .then(response => {
-        alert("New event added!");
-        console.log("Event created", response.data);
-        onEventAdded(response.data)
-    })
-    .catch(error => {
-        console.error("Error while creating an event", error);
-        if (error.response) {
-            console.error("Response data:", error.response.data);
-            console.error("Response status:", error.response.status);
-            console.error("Response headers:", error.response.headers);
-        } else if (error.request) {
-            console.error("Request data:", error.request);
-        } else {
-            console.error('Error message:', error.message);
-        }
-    });
+    console.log('Submitting event data:', eventData);
+    axios.post('http://localhost:5005/api/events', eventData)
+        .then(response => {
+            console.log('Event created:', response.data);
+            onEventAdded(response.data);
+        })
+        .catch(error => {
+            console.error("Error while creating an event", error);
+            if (error.response) {
+                console.error("Response data:", error.response.data);
+                console.error("Response status:", error.response.status);
+                console.error("Response headers:", error.response.headers);
+            } else if (error.request) {
+                console.error("Request data:", error.request);
+            } else {
+                console.error('Error message:', error.message);
+            }
+        });
 };
 
 return(
@@ -145,6 +179,9 @@ return(
         value={eventData.kiez}
         onChange={handleChange}
         required>
+            {kiezOptions.map(kiez => (
+                    <option key={kiez._id} value={kiez._id}>{kiez.kiezName}</option>
+                ))}
         <option value="All">All</option>
         <option value="Pankow">Pankow</option>
         <option value="Mitte">Mitte</option>
