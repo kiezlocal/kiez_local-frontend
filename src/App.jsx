@@ -28,6 +28,8 @@ function App() {
       <Route path="/kiez" element={<KiezGrid/>}></Route>
       <Route path="/imprint" element={<Imprint />} />
       <Route path="/terms" element={<TermsOfUse />} />
+      <Route path="/events/:eventId/edit" element={<EditEventForm />} />
+      <Route path="/kiezs/:kiezId/edit" element={<EditKiezForm />} />
       {/* <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
       <Route path="/events/:eventId" element={<EventDetails/>}></Route> */}
       

@@ -32,7 +32,7 @@ const Login = () => {
       if (response.ok) {
         const data = await response.json();
         alert('Login successful');
-        // You can store the token and navigate to a protected route
+
         localStorage.setItem('authToken', data.authToken);
         navigate('/');
       } else {
