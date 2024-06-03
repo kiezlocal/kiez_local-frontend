@@ -24,6 +24,7 @@ const EventGrid = ({ events, onDelete }) => {
                    <p>{formatDate(event.date)}</p>
                    <p>{event.startTime}</p>
                    <p>{event.address}</p>
+                   <p>{event.description}</p>
                    <p>{event.kiez}</p>
                     {/* <p>how to get kiez?</p> */}
                     <div>
