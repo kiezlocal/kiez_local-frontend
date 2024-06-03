@@ -25,7 +25,7 @@ const EventGrid = ({ events, onDelete }) => {
                    <p>{event.startTime}</p>
                    <p>{event.address}</p>
                    <p>{event.description}</p>
-                   <p>{event.kiez}</p>
+                   <p>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</p> {/* Display Kiez name */}
                     {/* <p>how to get kiez?</p> */}
                     <div>
                     <button onClick={() => navigate(`/events/${event._id}/edit`)}>Edit</button>
