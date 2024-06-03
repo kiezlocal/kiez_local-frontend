@@ -13,16 +13,15 @@ const EditKiezForm = () => {
     const { kiezId } = useParams();
 
     useEffect(() => {
-    axios.get(`http://localhost:5005/api/kiez/${kiezId}`)
-        .then(response => {
-            const { kiezName, description, image } = response.data;
-            setFormDetails({ kiezName, description, image });
-        })
-        .catch(error => {
-            console.error("Error while fetching kiez information.", error);
-        });
-}, [kiezId]);
-
+        axios.get(`http://localhost:5005/api/kiez/${kiezId}`)
+            .then(response => {
+                const { kiezName, description, image } = response.data;
+                setFormDetails({ kiezName, description, image });
+            })
+            .catch(error => {
+                console.error("Error while fetching kiez information.", error);
+            });
+    }, [kiezId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -37,7 +36,7 @@ const EditKiezForm = () => {
 
             if (response.status === 200) {
                 alert('Kiez updated successfully');
-                navigate('/kiezs'); // Adjust the path as needed
+                navigate('/kiez'); 
             } else {
                 alert('Failed to update kiez');
             }
@@ -56,7 +55,7 @@ const EditKiezForm = () => {
                         type="text"
                         id="kiezName"
                         name="kiezName"
-                        value={formDetails.kiezName}
+                        value={formDetails.kiezName} 
                         onChange={handleChange}
                         required
                     />
@@ -66,7 +65,7 @@ const EditKiezForm = () => {
                     <textarea
                         id="description"
                         name="description"
-                        value={formDetails.description}
+                        value={formDetails.description} 
                         onChange={handleChange}
                         required
                     />
@@ -77,7 +76,7 @@ const EditKiezForm = () => {
                         type="text"
                         id="image"
                         name="image"
-                        value={formDetails.image}
+                        value={formDetails.image} 
                         onChange={handleChange}
                     />
                 </div>

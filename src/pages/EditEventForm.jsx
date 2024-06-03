@@ -39,7 +39,7 @@ const EditEventForm = () => {
 
             if (response.status === 200) {
                 alert('Event updated successfully');
-                navigate('/events'); 
+                navigate('/'); 
             } else {
                 alert('Failed to update event');
             }
