@@ -1,5 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; 
 import "../App.css";
 
 
@@ -30,8 +31,9 @@ return(
                 {kiez.events.length > 0 ? (
                     <ul>
                         {kiez.events.map(event => (
-                            <li key={event._id}>{event.name}</li>
-                        ))}
+                            <li key={event._id}>
+                                        <Link to={`/events/${event._id}`}>{event.name}</Link>
+                                    </li>                        ))}
                     </ul>
                 ) : (
                     <p>No events available.</p>
