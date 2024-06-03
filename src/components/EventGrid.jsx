@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 
 const EventGrid = ({ events, onDelete }) => {
-    console.log(typeof onDelete);
     const navigate = useNavigate(); 
    
     return(
@@ -17,7 +16,7 @@ const EventGrid = ({ events, onDelete }) => {
                    <h2>{event.name}</h2>
                    <p>{event.date}</p>
                    <p>{event.address}</p>
-                   <p>{event.kiez}</p>
+                   <p>{event.kieName}</p>
                     {/* <p>how to get kiez?</p> */}
                     <div>
                     <button onClick={() => navigate(`/events/${event._id}/edit`)}>Edit</button>

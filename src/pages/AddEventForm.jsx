@@ -14,20 +14,6 @@ const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
         kiez: kiezOptions.length > 0 ? kiezOptions[0]._id : '',
     });
 
-
-// useEffect(() => {
-//     axios.get('http://localhost:5005/api/events')
-//     .then(response => {
-//         setKiezOptions(response.data);
-//         if (response.data.length > 0){
-//             setEventData(prevData => ({...prevData, kiez:kiezOptions[0]._id}));
-//         }
-//     }, [kiezOptions])
-//     .catch(error => {
-//         console.error("Error fetching kiez options", error);
-//     })
-// }, []);
-
 useEffect(() => {
     if (kiezOptions.length > 0) {
         setEventData(prevData => ({ ...prevData, kiez: kiezOptions[0]._id }));
@@ -38,41 +24,6 @@ const handleChange = (e) => {
     const { name, value } = e.target;
     setEventData({ ...eventData, [name]: value });
 };
-
-
-
-// const handleChange = (e) => {
-//     const {name, value} = e.target;
-//     setEventData({...eventData, [name]:value});
-// };
-
-// function handleImageUpload(){
-//     console.log("logic to upload the image");
-// }
-
-// const handleSubmit = (e) => {
-//     e.preventDefault();
-//     console.log("Submitting event data", eventData);
-//     axios
-//     .post('http://localhost:5005/api/events', eventData)
-//     .then(response => {
-//         alert("New event added!");
-//         console.log("Event created", response.data);
-//         onEventAdded(response.data)
-//     })
-//     .catch(error => {
-//         console.error("Error while creating an event", error);
-//         if (error.response) {
-//             console.error("Response data:", error.response.data);
-//             console.error("Response status:", error.response.status);
-//             console.error("Response headers:", error.response.headers);
-//         } else if (error.request) {
-//             console.error("Request data:", error.request);
-//         } else {
-//             console.error('Error message:', error.message);
-//         }
-//     });
-// };
 
 const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,9 +56,10 @@ return(
         <input 
         type="text"
         name="name"
+        id="name"
         value={eventData.name}
         onChange={handleChange}
-        placeholder="Enter event's name"
+        placeholder="Event name"
         required />
     </div>
     <div>
@@ -115,6 +67,7 @@ return(
         <input 
         type="date"
         name="date"
+        id="date"
         value={eventData.date}
         onChange={handleChange}
         placeholder="Enter event's date and time"
@@ -126,6 +79,7 @@ return(
         <input 
         type="text"
         name="address"
+        id="address"
         value={eventData.address}
         onChange={handleChange}
         placeholder="Enter event's address"
@@ -148,6 +102,7 @@ return(
         <input 
         type="text"
         name="image"
+        id="image"
         value={eventData.image}
         onChange={handleChange} />
     </div>
@@ -176,13 +131,18 @@ return(
         <select 
         type="text"
         name="kiez"
+        id="kiez"
         value={eventData.kiez}
         onChange={handleChange}
         required>
+        <option value="All">All</option>
+
             {kiezOptions.map(kiez => (
                     <option key={kiez._id} value={kiez._id}>{kiez.kiezName}</option>
                 ))}
-        <option value="All">All</option>
+                </select>
+                
+        {/* <option value="All">All</option>
         <option value="Pankow">Pankow</option>
         <option value="Mitte">Mitte</option>
         <option value="Reinickendorf">Reinickendorf</option>
@@ -198,7 +158,7 @@ return(
         <option value="Other">Other</option>  
             {kiezOptions.map(kiez => (
             <option key={kiez._id} value={kiez._id}>{kiez.name}</option> ))}
-            </select>
+            </select> */}
     </div>
     <button type="submit">Add Event</button>
 
