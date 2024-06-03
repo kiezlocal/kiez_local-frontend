@@ -13,6 +13,7 @@ import EventDetails from './pages/EventDetails';
 import KiezDetails from './pages/KiezDetails';
 import Imprint from './pages/Imprint';
 import TermsOfUse from './pages/TermsOfUse';
+import NotFound from './pages/NotFound';
 
 function App() {
   
@@ -34,12 +35,11 @@ function App() {
       <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
       <Route path="/events/:eventId/edit" element={<EditEventForm />} />
       <Route path="/kiezs/:kiezId/edit" element={<EditKiezForm />} />
-      {/* <Route path="*" element= {<NotFound/>}></Route> */}
-      
+      <Route path="*" element= {<NotFound/>}></Route>      
 </Routes>
 </div>
+<Footer/>
 </Router>
-      <Footer/>
 </>
   );
 }
