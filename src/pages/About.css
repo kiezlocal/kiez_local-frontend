@@ -1,5 +1,13 @@
 /* src/pages/About.css */
 
+/* List of CSS pages:
+App.css - for general rules, like margin, padding, etc.
+About.css
+Forms.css - for the forms pages
+Homepage.css - for the homepage
+LoginRegister.css - for Login and Register pages
+SmallPages - for small pages: temrs of use, not found, etc. */
+
 .about-container {
     margin: 20px;
     font-family: 'DM Sans', sans-serif;

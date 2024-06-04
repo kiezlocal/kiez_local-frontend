@@ -14,12 +14,16 @@ import KiezDetails from './pages/KiezDetails';
 import Imprint from './pages/Imprint';
 import TermsOfUse from './pages/TermsOfUse';
 import NotFound from './pages/NotFound';
+import { ChakraProvider } from '@chakra-ui/react';
+import { AuthProviderWrapper } from '../context/auth.context';
+
+
 
 function App() {
-  
-
   return (
-    <>
+    <ChakraProvider>
+
+<AuthProviderWrapper> 
 <Router>
 <Navbar/>
 <div>
@@ -40,7 +44,10 @@ function App() {
 </div>
 <Footer/>
 </Router>
-</>
+
+</AuthProviderWrapper>
+</ChakraProvider>
+
   );
 }
 

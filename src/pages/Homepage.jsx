@@ -1,10 +1,16 @@
 import EventGrid from "../components/EventGrid";
 import SearchBar from "../components/Searchbar";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import AddEventForm from "./AddEventForm";
+import "/src/pages/Homepage.css";
+import { AuthContext } from "../../context/auth.context";
+
+
+import { Flex, Spacer } from '@chakra-ui/react'
 // import { useNavigate } from 'react-router-dom';
-import { isLoggedIn } from "../auth";
+// import { isLoggedIn } from "../auth";
+
 
 //Functions:
 
@@ -15,9 +21,8 @@ const Homepage = () => {
     const [filteredEvents, setFilteredEvents] = useState([]);
     const [kiezOptions, setKiezOptions] = useState([]);
 
-    const [displayNewEvent, setDisplayNewEvent] = useState(false);
-    const [displayAllEvents, setDisplayAllEvents] = useState(false);
-    const [loggedIn, setLoggedIn] = useState(false);
+
+    const {loggedIn, isLoading} = useContext(AuthContext);
 
     // const navigate = useNavigate();
 
@@ -60,8 +65,8 @@ const Homepage = () => {
               kiez: kiezResponse.data,
             });
           }
-          const loginStatus = await isLoggedIn();
-          setLoggedIn(loginStatus);
+          // const loginStatus = await loggedIn();
+          // setLoggedIn(loginStatus);
         } catch (error) {
           console.error(
             "Error while fetching events or kiez information.",
@@ -130,12 +135,22 @@ console.log("Is user logged in? ", loggedIn);
 return(
     <div>
         <header>
+        {isLoading ? (
+          <p>Loading...</p>
+        ) : loggedIn ? (
+          <>
+            <button onClick={() => {/* handle add event */}}>Add Event</button>
+            <button onClick={() => {/* handle delete event */}}>Delete Event</button>
+          </>
+        ) : (
+          <p>Login to manage events</p>
+        )}
 
         </header>
 <SearchBar activateSearch={activateSearch} />
 <EventGrid events={filteredEvents} onDelete={handleDelete} loggedIn={loggedIn} />
-{/* <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} /> */}
 {loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />}
+{/* {loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />} */}
 {/* {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
 } */}

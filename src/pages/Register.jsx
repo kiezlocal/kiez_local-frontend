@@ -1,5 +1,12 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios'; 
+
+function SignupPage(props){
+  const [errorMessage, setErrorMessage] = useState(undefined);
+  const navigate = useNavigate();
+
+}
 
 const Register = () => {
   const [formDetails, setFormDetails] = useState({
@@ -26,7 +33,7 @@ const Register = () => {
 
     try {
       console.log('Submitting form:', formDetails);
-      const response = await fetch('http://localhost:5005/auth/signup', {
+      const response = await fetch(`${import.meta.env.VITE_API_URL}/api/signup`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'

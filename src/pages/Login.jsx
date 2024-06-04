@@ -1,49 +1,50 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../../context/auth.context';
+
+// function LoginPage(props){
+  
+
+
 
 const Login = () => {
   const [formDetails, setFormDetails] = useState({
     email: '',
     password: ''
   });
+  const { storeToken, setIsLoggedIn, setUser } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormDetails({ ...formDetails, [name]: value });
+    setFormDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+
+
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/auth/login`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          email: formDetails.email,
-          password: formDetails.password
-        })
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        alert('Login successful');
-
-        localStorage.setItem('authToken', data.authToken);
-        navigate('/');
-      } else {
-        const errorData = await response.json();
-        alert(`Login failed: ${errorData.message}`);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, formDetails);
+        if (response.status === 200) {
+          const data = response.data;
+          storeToken(data.authToken);
+          setUser(data.user);
+          setIsLoggedIn(true);
+          alert('Login successful!');
+          navigate('/');
+        } else {
+          alert('Login failed: ' + response.data.message);
+        }
+      } catch (error) {
+        console.error('Error logging in:', error);
+        alert('Login failed');
       }
-    } catch (error) {
-      console.error('Error logging in:', error);
-    }
-  };
+    };
+  
 
   return (
     <div className="login-container">
