@@ -3,7 +3,8 @@ import SearchBar from "../components/Searchbar";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AddEventForm from "./AddEventForm";
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
+import { isLoggedIn } from "../auth";
 
 //Functions:
 
@@ -16,23 +17,52 @@ const Homepage = () => {
 
     const [displayNewEvent, setDisplayNewEvent] = useState(false);
     const [displayAllEvents, setDisplayAllEvents] = useState(false);
-    const navigate = useNavigate();
+    const [loggedIn, setLoggedIn] = useState(false);
+
+    // const navigate = useNavigate();
 
 
+    
+    //     axios.get([
+    //         axios.get('http://localhost:5005/api/events'),
+    //         axios.get('http://localhost:5005/api/kiez')
+    //     ])
+    //     .then(([eventsResponse, kiezResponse]) => {
+    //         setEvents(eventsResponse.data);
+    //         setFilteredEvents(eventsResponse.data);
+    //         setKiezOptions(kiezResponse.data);
+    //     })
+    //     .catch(error => {
+    //         console.error("Error while fetching events or kiez information.", error);
+    //     });
+    // }, []);
     useEffect(() => {
-        Promise.all([
-            axios.get('http://localhost:5005/api/events'),
-            axios.get('http://localhost:5005/api/kiez')
-        ])
-        .then(([eventsResponse, kiezResponse]) => {
+    const fetchEventsAndKiez = async () => {
+        try {
+          const eventsResponse = await axios.get('http://localhost:5005/api/events');
+          const kiezResponse = await axios.get('http://localhost:5005/api/kiez');
+          
+          console.log("Events response data:", eventsResponse.data);
+          console.log("Kiez response data:", kiezResponse.data);
+  
+          if (Array.isArray(eventsResponse.data) && Array.isArray(kiezResponse.data)) {
             setEvents(eventsResponse.data);
             setFilteredEvents(eventsResponse.data);
             setKiezOptions(kiezResponse.data);
-        })
-        .catch(error => {
-            console.error("Error while fetching events or kiez information.", error);
-        });
-    }, []);
+          } else {
+            console.error("Unexpected response format", { events: eventsResponse.data, kiez: kiezResponse.data });
+          }
+        const loginStatus = await isLoggedIn();
+        setLoggedIn(loginStatus); 
+
+        } catch (error) {
+          console.error("Error while fetching events or kiez information.", error);
+        }
+        
+      };
+      fetchEventsAndKiez();
+  }, []);
+    
 
     const activateSearch = (searchInfo) => {
         let filtered = events;
@@ -72,14 +102,18 @@ const Homepage = () => {
     
     const handleDelete = (eventId) => {
         axios.delete(`http://localhost:5005/api/events/${eventId}`)
-            .then(() => {
-                setEvents(prevEvents => prevEvents.filter(event => event._id !== eventId));
-                setFilteredEvents(prevEvents => prevEvents.filter(event => event._id !== eventId));
-            })
+        .then(response => {
+            setEvents(events.filter(event => event._id !== eventId));
+            setFilteredEvents(filteredEvents.filter(event => event._id !== eventId));
+            alert("Event deleted successfully");
+          })
             .catch(error => {
                 console.error("Error while deleting event.", error);
             });
     };
+
+// const loggedIn = isLoggedIn();
+console.log("Is user logged in? ", loggedIn);
 
     
 return(
@@ -88,11 +122,12 @@ return(
 
         </header>
 <SearchBar activateSearch={activateSearch} />
-<EventGrid events={filteredEvents} onDelete={handleDelete} />
-<AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />
-{displayNewEvent &&
+<EventGrid events={filteredEvents} onDelete={handleDelete} loggedIn={loggedIn} />
+{/* <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} /> */}
+{loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />}
+{/* {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
-}
+} */}
 
 {/* here to add displayeditform */}
 
