@@ -8,7 +8,7 @@ const EventDetail = () => {
   useEffect(() => {
     const fetchEvent = async () => {
       try {
-        const response = await fetch(`http://localhost:5005/api/events/${eventId}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`);
         const data = await response.json();
         setEvent(data);
       } catch (error) {
