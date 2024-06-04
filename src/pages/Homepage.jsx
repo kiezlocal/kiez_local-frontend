@@ -40,13 +40,6 @@ const Homepage = () => {
       const fetchEventsAndKiez = async () => {
 
         try {
-          const eventsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
-          const kiezResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`);
-          
-          console.log("Events response data:", eventsResponse.data);
-          console.log("Kiez response data:", kiezResponse.data);
-  
-          if (Array.isArray(eventsResponse.data) && Array.isArray(kiezResponse.data)) {
           const eventsResponse = await axios.get(
             `${import.meta.env.VITE_API_URL}/api/events`
           );
@@ -78,6 +71,8 @@ const Homepage = () => {
       };
       fetchEventsAndKiez();
     }, []);
+    
+
     
 
     const activateSearch = (searchInfo) => {
