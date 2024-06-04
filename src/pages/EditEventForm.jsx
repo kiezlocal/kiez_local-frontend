@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import { Box, Button, FormControl, FormLabel, Input, Select, Textarea, VStack, Heading } from '@chakra-ui/react';
+
+
 
 const EditEventForm = () => {
     const [formDetails, setFormDetails] = useState({
@@ -14,6 +17,7 @@ const EditEventForm = () => {
         kiezId: ''
     });
 
+    const [kiezOptions, setKiezOptions] = useState([]);
     const navigate = useNavigate();
     const { eventId } = useParams();
 
@@ -25,7 +29,15 @@ const EditEventForm = () => {
             .catch(error => {
                 console.error("Error while fetching event information.", error);
             });
-    }, [eventId]);
+    });
+
+    axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
+        .then(response => {
+            setKiezOptions(response.data);
+        })
+        .catch(error => {
+            console.error("Error while fetching kiez options.", error);
+        });
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,81 +62,83 @@ const EditEventForm = () => {
     };
 
     return (
-        <div className="edit-event-container">
-            <h1>Edit Event</h1>
+        <Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label htmlFor="name">Event Name</label>
-                    <input
+                <Heading mb={6} size="lg">Edit Event</Heading>
+                <VStack spacing={4} align="stretch">
+
+                    <FormControl isRequired>
+                    <FormLabel htmlFor="name">Event Name</FormLabel>
+                    <Input
                         type="text"
                         id="name"
                         name="name"
                         value={formDetails.name}
                         onChange={handleChange}
-                        required
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="date">Date</label>
-                    <input
+                    </FormControl>
+
+                    <FormControl isRequired>
+                    <FormLabel htmlFor="date">Date</FormLabel>
+                    <Input
                         type="date"
                         id="date"
                         name="date"
                         value={formDetails.date.split('T')[0]} 
                         onChange={handleChange}
-                        required
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="startTime">Time</label>
-                    <input
+                    </FormControl>
+            
+                <FormControl isRequired>
+                <FormLabel htmlFor="startTime">Start Time</FormLabel>
+                    <Input
                         type="text"
                         id="startTime"
                         name="startTime"
                         value={formDetails.startTime} 
                         onChange={handleChange}
-                        required
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="address">Address</label>
-                    <input
+                    </FormControl>
+
+               <FormControl isRequired>
+               <FormLabel htmlFor="address">Full address</FormLabel>
+                    <Input
                         type="text"
                         id="address"
                         name="address"
                         value={formDetails.address}
                         onChange={handleChange}
-                        required
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="description">Description</label>
-                    <textarea
+                    </FormControl>
+              
+              <FormControl isRequired>
+              <FormLabel htmlFor="description">Description</FormLabel>
+                    <Textarea
                         id="description"
                         name="description"
                         value={formDetails.description}
                         onChange={handleChange}
-                        required
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="image">Image URL</label>
-                    <input
+                    </FormControl>
+              
+              <FormControl>
+              <FormLabel htmlFor="image">Image URL</FormLabel>
+                    <Input
                         type="text"
                         id="image"
                         name="image"
                         value={formDetails.image}
                         onChange={handleChange}
                     />
-                </div>
-                <div className="form-group">
-                    <label htmlFor="category">Category</label>
-                    <select
+                    </FormControl>
+               
+               <FormControl isRequired>
+               <FormLabel htmlFor="category">Category</FormLabel>
+                    <Select
                         id="category"
                         name="category"
                         value={formDetails.category}
                         onChange={handleChange}
-                        required
                     >
                         <option value="Music">Music</option>
                         <option value="Art">Art</option>
@@ -135,11 +149,29 @@ const EditEventForm = () => {
                         <option value="Tours">Tours</option>
                         <option value="Social gatherings">Social Gatherings</option>
                         <option value="Other">Other</option>
-                    </select>
-                </div>
-                <button type="submit">Update Event</button>
-            </form>
-        </div>
+                    </Select>
+                    </FormControl>
+              
+              <FormControl isRequired>
+              <FormLabel htmlFor="kiez">Kiez</FormLabel>
+              <Select 
+              name="kiez"
+              id="kiez"
+              value={formDetails.kiezId}
+              onChange={handleChange}
+            >
+              <option value="All">All</option>
+              {kiezOptions.map(kiez => (
+                <option key={kiez._id} value={kiez._id}>{kiez.kiezName}</option>
+              ))}
+            </Select>
+            </FormControl>
+
+
+                <Button type="submit" colorScheme="blue" size="lg" width="full">Update Event</Button>
+                </VStack>
+                </form>
+            </Box>
     );
 };
 
