@@ -37,7 +37,8 @@ const Homepage = () => {
     //     });
     // }, []);
     useEffect(() => {
-    const fetchEventsAndKiez = async () => {
+      const fetchEventsAndKiez = async () => {
+
         try {
           const eventsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
           const kiezResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`);
@@ -46,22 +47,37 @@ const Homepage = () => {
           console.log("Kiez response data:", kiezResponse.data);
   
           if (Array.isArray(eventsResponse.data) && Array.isArray(kiezResponse.data)) {
+          const eventsResponse = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/events`
+          );
+          const kiezResponse = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/kiez`
+          );
+
+          if (
+            Array.isArray(eventsResponse.data) &&
+            Array.isArray(kiezResponse.data)
+          ) {
             setEvents(eventsResponse.data);
             setFilteredEvents(eventsResponse.data);
             setKiezOptions(kiezResponse.data);
           } else {
-            console.error("Unexpected response format", { events: eventsResponse.data, kiez: kiezResponse.data });
+            console.error("Unexpected response format", {
+              events: eventsResponse.data,
+              kiez: kiezResponse.data,
+            });
           }
-        const loginStatus = await isLoggedIn();
-        setLoggedIn(loginStatus); 
-
+          const loginStatus = await isLoggedIn();
+          setLoggedIn(loginStatus);
         } catch (error) {
-          console.error("Error while fetching events or kiez information.", error);
+          console.error(
+            "Error while fetching events or kiez information.",
+            error
+          );
         }
-        
       };
       fetchEventsAndKiez();
-  }, []);
+    }, []);
     
 
     const activateSearch = (searchInfo) => {
