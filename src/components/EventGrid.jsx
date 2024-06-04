@@ -29,7 +29,7 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
                     {/* <p>{event.kiez.kiezName}</p> */}
                     <div>
                     <button onClick={() => navigate(`/events/${event._id}/edit`)}>Edit</button>
-                    {loggedIn && <button onClick={() => onDelete(event._id)}>Delete</button>}                    </div>
+                    {/*{loggedIn && <button onClick={() => onDelete(event._id)}>Delete</button>} */}                    </div>
                 </div>
             ))}
         </div>

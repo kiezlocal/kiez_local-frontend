@@ -134,8 +134,8 @@ return(
         </header>
 <SearchBar activateSearch={activateSearch} />
 <EventGrid events={filteredEvents} onDelete={handleDelete} loggedIn={loggedIn} />
-{/* <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} /> */}
-{loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />}
+ <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} /> 
+{/*{loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />} */}
 {/* {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
 } */}
