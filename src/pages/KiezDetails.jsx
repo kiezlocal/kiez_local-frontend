@@ -8,7 +8,7 @@ const KiezDetails = () => {
   useEffect(() => {
     const fetchKiez = async () => {
       try {
-        const response = await fetch(`http://localhost:5005/api/kiez/${kiezId}`);
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/api/kiez/${kiezId}`);
         const data = await response.json();
         setKiez(data);
       } catch (error) {

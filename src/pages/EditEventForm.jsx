@@ -18,7 +18,7 @@ const EditEventForm = () => {
     const { eventId } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/api/events/${eventId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`)
             .then(response => {
                 setFormDetails(response.data);
             })
