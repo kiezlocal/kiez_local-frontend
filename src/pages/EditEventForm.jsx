@@ -18,7 +18,7 @@ const EditEventForm = () => {
     const { eventId } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/api/events/${eventId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`)
             .then(response => {
                 setFormDetails(response.data);
             })
@@ -36,7 +36,7 @@ const EditEventForm = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:5005/api/events/${eventId}`, formDetails);
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`, formDetails);
 
             if (response.status === 200) {
                 alert('Event updated successfully');

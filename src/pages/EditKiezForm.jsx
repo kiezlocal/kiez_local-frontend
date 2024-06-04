@@ -13,7 +13,7 @@ const EditKiezForm = () => {
     const { kiezId } = useParams();
 
     useEffect(() => {
-        axios.get(`http://localhost:5005/api/kiez/${kiezId}`)
+        axios.get(`${import.meta.env.VITE_API_URL}/api/kiez/${kiezId}`)
             .then(response => {
                 const { kiezName, description, image } = response.data;
                 setFormDetails({ kiezName, description, image });
@@ -32,7 +32,7 @@ const EditKiezForm = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:5005/api/kiez/${kiezId}`, formDetails);
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/kiez/${kiezId}`, formDetails);
 
             if (response.status === 200) {
                 alert('Kiez updated successfully');

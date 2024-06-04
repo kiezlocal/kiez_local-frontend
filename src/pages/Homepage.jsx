@@ -24,8 +24,8 @@ const Homepage = () => {
 
     
     //     axios.get([
-    //         axios.get('http://localhost:5005/api/events'),
-    //         axios.get('http://localhost:5005/api/kiez')
+    //         axios.get(`${import.meta.env.VITE_API_URL}/api/events`),
+    //         axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
     //     ])
     //     .then(([eventsResponse, kiezResponse]) => {
     //         setEvents(eventsResponse.data);
@@ -37,31 +37,40 @@ const Homepage = () => {
     //     });
     // }, []);
     useEffect(() => {
-    const fetchEventsAndKiez = async () => {
+      const fetchEventsAndKiez = async () => {
+
         try {
-          const eventsResponse = await axios.get('http://localhost:5005/api/events');
-          const kiezResponse = await axios.get('http://localhost:5005/api/kiez');
-          
-          console.log("Events response data:", eventsResponse.data);
-          console.log("Kiez response data:", kiezResponse.data);
-  
-          if (Array.isArray(eventsResponse.data) && Array.isArray(kiezResponse.data)) {
+          const eventsResponse = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/events`
+          );
+          const kiezResponse = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/kiez`
+          );
+
+          if (
+            Array.isArray(eventsResponse.data) &&
+            Array.isArray(kiezResponse.data)
+          ) {
             setEvents(eventsResponse.data);
             setFilteredEvents(eventsResponse.data);
             setKiezOptions(kiezResponse.data);
           } else {
-            console.error("Unexpected response format", { events: eventsResponse.data, kiez: kiezResponse.data });
+            console.error("Unexpected response format", {
+              events: eventsResponse.data,
+              kiez: kiezResponse.data,
+            });
           }
-        const loginStatus = await isLoggedIn();
-        setLoggedIn(loginStatus); 
-
+          const loginStatus = await isLoggedIn();
+          setLoggedIn(loginStatus);
         } catch (error) {
-          console.error("Error while fetching events or kiez information.", error);
+          console.error(
+            "Error while fetching events or kiez information.",
+            error
+          );
         }
-        
       };
       fetchEventsAndKiez();
-  }, []);
+    }, []);
     
 
     const activateSearch = (searchInfo) => {
@@ -101,7 +110,7 @@ const Homepage = () => {
     }
     
     const handleDelete = (eventId) => {
-        axios.delete(`http://localhost:5005/api/events/${eventId}`)
+        axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`)
         .then(response => {
             setEvents(events.filter(event => event._id !== eventId));
             setFilteredEvents(filteredEvents.filter(event => event._id !== eventId));

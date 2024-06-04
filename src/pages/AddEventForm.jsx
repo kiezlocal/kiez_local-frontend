@@ -29,7 +29,7 @@ const handleChange = (e) => {
 const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Submitting event data:', eventData);
-    axios.post('http://localhost:5005/api/events', eventData)
+    axios.post(`${import.meta.env.VITE_API_URL}/api/events`, eventData)
         .then(response => {
             console.log('Event created:', response.data);
             onEventAdded(response.data);
