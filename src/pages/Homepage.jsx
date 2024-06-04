@@ -24,8 +24,8 @@ const Homepage = () => {
 
     
     //     axios.get([
-    //         axios.get('http://localhost:5005/api/events'),
-    //         axios.get('http://localhost:5005/api/kiez')
+    //         axios.get(`${import.meta.env.VITE_API_URL}/api/events`),
+    //         axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
     //     ])
     //     .then(([eventsResponse, kiezResponse]) => {
     //         setEvents(eventsResponse.data);
@@ -39,8 +39,8 @@ const Homepage = () => {
     useEffect(() => {
     const fetchEventsAndKiez = async () => {
         try {
-          const eventsResponse = await axios.get('http://localhost:5005/api/events');
-          const kiezResponse = await axios.get('http://localhost:5005/api/kiez');
+          const eventsResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/events`);
+          const kiezResponse = await axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`);
           
           console.log("Events response data:", eventsResponse.data);
           console.log("Kiez response data:", kiezResponse.data);
@@ -101,7 +101,7 @@ const Homepage = () => {
     }
     
     const handleDelete = (eventId) => {
-        axios.delete(`http://localhost:5005/api/events/${eventId}`)
+        axios.delete(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`)
         .then(response => {
             setEvents(events.filter(event => event._id !== eventId));
             setFilteredEvents(filteredEvents.filter(event => event._id !== eventId));

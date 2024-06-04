@@ -10,7 +10,7 @@ const KiezGrid = () => {
 
 
 useEffect(() => {
-    axios.get('http://localhost:5005/api/kiez')
+    axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
     .then(response => {
         console.log(response.data); 
         setKiez(response.data);
