@@ -7,6 +7,7 @@ const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
     const [eventData, setEventData] = useState({
         name: "",
         date: "",
+        startTime: '',
         address: "",
         description: "",
         image: "",
@@ -71,6 +72,17 @@ return(
         value={eventData.date}
         onChange={handleChange}
         placeholder="Enter event's date and time"
+        required
+         />
+    </div>
+    <div>
+        <label htmlFor="startTime">startTime</label>
+        <input 
+        type="text"
+        name="startTime"
+        value={eventData.startTime}
+        onChange={handleChange}
+        placeholder="Enter startTime"
         required
          />
     </div>
