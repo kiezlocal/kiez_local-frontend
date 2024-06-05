@@ -9,7 +9,9 @@ import { AuthContext } from "../../context/auth.context";
 import { ChakraProvider } from '@chakra-ui/react';
 
 // import { useNavigate } from 'react-router-dom';
-// import { isLoggedIn } from "../auth";
+// import { loggedIn } from "../auth";
+
+import { Link } from 'react-router-dom';
 
 
 //Functions:
@@ -80,8 +82,11 @@ return(
         </header>
 <SearchBar setFilteredEvents={setFilteredEvents} setKiezOptions={setKiezOptions} />
 <EventGrid events={filteredEvents} onDelete={handleDelete} loggedIn={loggedIn} />
-{loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />}
-{/* {loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />} */}
+<button>
+  <Link to="/events/addevent">Add events</Link>
+</button>
+{/* <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} /> */}
+{/*{loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />} */}
 {/* {displayNewEvent &&
 <AddEventForm setDisplayNewEvent={setDisplayNewEvent} setDisplayAllEvents={setDisplayAllEvents} />
 } */}

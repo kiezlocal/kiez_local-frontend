@@ -14,6 +14,7 @@ import KiezDetails from './pages/KiezDetails';
 import Imprint from './pages/Imprint';
 import TermsOfUse from './pages/TermsOfUse';
 import NotFound from './pages/NotFound';
+import AddEventForm from './pages/AddEventForm';
 import { ChakraProvider } from '@chakra-ui/react';
 import { AuthProviderWrapper } from '../context/auth.context';
 
@@ -38,6 +39,7 @@ function App() {
       <Route path="/events/:eventId" element={<EventDetails/>}></Route>
       <Route path="/kiezs/:kiezId" element={<KiezDetails/>}></Route>
       <Route path="/events/:eventId/edit" element={<EditEventForm />} />
+      <Route path="/events/addevent" element={<AddEventForm />} />
       <Route path="/kiezs/:kiezId/edit" element={<EditKiezForm />} />
       <Route path="*" element= {<NotFound/>}></Route>      
 </Routes>

@@ -5,36 +5,55 @@ import { Box, Button, FormControl, FormLabel, Input, Select, Textarea, VStack, H
 
 const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
     const [eventData, setEventData] = useState({
-        name: "",
-        date: "",
+        name: '',
+        date: '',
         startTime: '',
-        address: "",
-        description: "",
-        image: "",
-        category: "",
-        kiez: kiezOptions.length > 0 ? kiezOptions[0]._id : '',
+        address: '',
+        description: '',
+        image: '',
+        category: ''
     });
 
-useEffect(() => {
-    if (kiezOptions.length > 0) {
-        setEventData(prevData => ({ ...prevData, kiez: kiezOptions[0]._id }));
-    }
-}, [kiezOptions]);
+    const [kiezOptions, setKiezOptions] = useState([]);
 
-const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEventData({ ...eventData, [name]: value });
-};
+    const onEventAdded = (newEvent) => {
+        console.log('New event added:', newEvent);
+        // You can perform any action with the new event here
+    };
 
-const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log('Submitting event data:', eventData);
-    axios.post(`${import.meta.env.VITE_API_URL}/api/events`, eventData)
-        .then(response => {
+    useEffect(() => {
+        // Fetch Kiez options from backend
+        axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
+            .then(response => {
+                setKiezOptions(response.data);
+            })
+            .catch(error => {
+                console.error("Error while fetching Kiez options:", error);
+            });
+    }, []);
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setEventData({ ...eventData, [name]: value });
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/events`, eventData);
             console.log('Event created:', response.data);
             onEventAdded(response.data);
-        })
-        .catch(error => {
+            // Reset form data after successful submission
+            setEventData({
+                name: '',
+                date: '',
+                startTime: '',
+                address: '',
+                description: '',
+                image: '',
+                category: ''
+            });
+        } catch (error) {
             console.error("Error while creating an event", error);
             if (error.response) {
                 console.error("Response data:", error.response.data);
@@ -45,8 +64,8 @@ const handleSubmit = (e) => {
             } else {
                 console.error('Error message:', error.message);
             }
-        });
-};
+        }
+    };
 
 return(
 <Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
