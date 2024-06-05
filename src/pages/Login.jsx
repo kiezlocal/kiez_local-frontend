@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import {AuthContext} from '../context/auth.context'
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -9,6 +10,7 @@ const LoginPage = () => {
   const [password, setPassword] = useState('');
   const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
+  const {storeToken, authenticateUser} = useContext(AuthContext);
 
   const handleEmailChange = (e) => setEmail(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
@@ -19,9 +21,10 @@ const LoginPage = () => {
 
     axios.post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
+        storeToken(response.data.authToken)
+        authenticateUser();
         const authToken = response.data.authToken;
         console.log("JWT token", authToken);
-        localStorage.setItem("authToken", authToken);
         navigate("/");
       })
       .catch((error) => {

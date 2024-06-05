@@ -46,9 +46,8 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
                   <CardFooter>
                       <ButtonGroup spacing="2">
                           <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
-                          {loggedIn && (
-                              <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
-                          )}                         
+                          <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
+                                                   
                       </ButtonGroup>
                   </CardFooter>
               </Card>

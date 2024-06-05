@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { Box, FormControl, FormLabel, Input, Select, Textarea, Button, VStack, Heading } from '@chakra-ui/react';
 
-const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
+
+const AddEventForm = () => {
     const [eventData, setEventData] = useState({
         name: "",
         date: "",
@@ -10,16 +13,10 @@ const AddEventForm = ({onEventAdded, kiezOptions = [] }) => {
         description: "",
         image: "",
         category: "",
-        kiez: kiezOptions.length > 0 ? kiezOptions[0]._id : '',
+        kiez: '',
     });
 
-useEffect(() => {
-    console.log("Kiez options:", kiezOptions); 
-
-    if (kiezOptions.length > 0) {
-        setEventData(prevData => ({ ...prevData, kiez: kiezOptions[0]._id }));
-    }
-}, [kiezOptions]);
+const navigate = useNavigate();
 
 const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,7 +30,7 @@ const handleSubmit = (e) => {
     axios.post(`${import.meta.env.VITE_API_URL}/api/events`, eventData)
         .then(response => {
             console.log('Event created:', response.data);
-            onEventAdded(response.data);
+            navigate("/")
         })
         .catch(error => {
             console.error("Error while creating an event", error);
@@ -49,137 +46,149 @@ const handleSubmit = (e) => {
         });
 };
 
+
+const [kiezOptions, setKiezOptions] = useState([]);
+
+const getKiezInfo = () => {
+  axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
+  .then(response => {
+    setKiezOptions(response.data);
+    
+  })
+  .catch(error => {
+    console.log(error)
+  })
+}
+
+useEffect(() => {
+  getKiezInfo() 
+ 
+}, []);
+
+
+
+
 return(
-<form onSubmit={handleSubmit}>
-    <legend>Add Event's Information</legend>
+<Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
+            <form onSubmit={handleSubmit}>
+                <Heading mb={6} size="lg">Add Event's Information</Heading>
+                <VStack spacing={4} align="stretch">
 
-    <div>
-        <label htmlFor="name">Event's name</label>
-        <input 
-        type="text"
-        name="name"
-        id="name"
-        value={eventData.name}
-        onChange={handleChange}
-        placeholder="Event name"
-        required />
-    </div>
-    <div>
-        <label htmlFor="date">Date</label>
-        <input 
-        type="date"
-        name="date"
-        id="date"
-        value={eventData.date}
-        onChange={handleChange}
-        placeholder="Enter event's date and time"
-        required
-         />
-    </div>
-    <div>
-        <label htmlFor="startTime">startTime</label>
-        <input 
-        type="text"
-        name="startTime"
-        value={eventData.startTime}
-        onChange={handleChange}
-        placeholder="Enter startTime"
-        required
-         />
-    </div>
-    <div>
-        <label htmlFor="address">Full address</label>
-        <input 
-        type="text"
-        name="address"
-        id="address"
-        value={eventData.address}
-        onChange={handleChange}
-        placeholder="Enter event's address"
-        required
-         />
-    </div>
-    <div>
-        <label htmlFor="description">Description</label>
-        <textarea 
-        name="description" 
-        id="description"
-        value={eventData.description}
-        onChange={handleChange}
-        placeholder="Enter event's description"
-        required
-        ></textarea>
-    </div>
-    <div>
-        <label htmlFor="image">Image URL</label>
-        <input 
-        type="text"
-        name="image"
-        id="image"
-        value={eventData.image}
-        onChange={handleChange} />
-    </div>
-    <div>
-        <label htmlFor="category">Category</label>
-        <select 
-        name="category" 
-        id="category"
-        value={eventData.category}
-        onChange={handleChange}
-        required>
-        <option value="All">All</option>
-        <option value="Music">Music</option>
-        <option value="Art">Art</option>
-        <option value="Local markets">Local markets</option>
-        <option value="Sport">Sport</option>
-        <option value="Food&drinks">Food & Drinks</option>
-        <option value="Events for kids">Events for Kids</option>
-        <option value="Tours">Tours</option>
-        <option value="Social gatherings">Social Gatherings</option>
-        <option value="Other">Other</option>    
-        </select>
-    </div>
-    <div>
-        <label htmlFor="kiez">Kiez</label>
-        <select
-    name="kiez"
-    id="kiez"
-    value={eventData.kiez}
-    onChange={handleChange}
-    required
->
-    <option value="">Select a Kiez</option>
-    {kiezOptions.map((kiez) => (
-        <option key={kiez._id} value={kiez._id}>
-            {kiez.kiezName}
-        </option>
-    ))}
-</select>
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="name">Event's Name</FormLabel>
+                        <Input
+                            type="text"
+                            id="name"
+                            name="name"
+                            value={eventData.name}
+                            onChange={handleChange}
+                            placeholder="Event name"
+                        />
+                    </FormControl>
 
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="date">Date</FormLabel>
+                        <Input
+                            type="date"
+                            id="date"
+                            name="date"
+                            value={eventData.date}
+                            onChange={handleChange}
+                            placeholder="Enter event's date and time"
+                        />
+                    </FormControl>
 
-                
-        {/* <option value="All">All</option>
-        <option value="Pankow">Pankow</option>
-        <option value="Mitte">Mitte</option>
-        <option value="Reinickendorf">Reinickendorf</option>
-        <option value="Spandau">Spandau</option>
-        <option value="Charlottenburg-Wilmersdorf">Charlottenburg-Wilmersdorf</option>
-        <option value="Steglitz-Zehlendorf">Steglitz-Zehlendorf</option>
-        <option value="Tempelhof-Schöneberg">Tempelhof-Schöneberg</option>
-        <option value="Neukölln">Neukölln</option>
-        <option value="Friedrichshain-Kreuzberg">Friedrichshain-Kreuzberg</option>
-        <option value="Lichtenberg">Lichtenberg</option>
-        <option value="Marzahn-Hellersdorf">Marzahn-Hellersdorf</option>
-        <option value="Treptow-Köpenick">Treptow-Köpenick</option>
-        <option value="Other">Other</option>  
-            {kiezOptions.map(kiez => (
-            <option key={kiez._id} value={kiez._id}>{kiez.name}</option> ))}
-            </select> */}
-    </div>
-    <button type="submit">Add Event</button>
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="startTime">Start Time</FormLabel>
+                        <Input
+                            type="text"
+                            id="startTime"
+                            name="startTime"
+                            value={eventData.startTime}
+                            onChange={handleChange}
+                            placeholder="Enter start time"
+                        />
+                    </FormControl>
 
-</form>
-);
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="address">Full Address</FormLabel>
+                        <Input
+                            type="text"
+                            id="address"
+                            name="address"
+                            value={eventData.address}
+                            onChange={handleChange}
+                            placeholder="Enter event's address"
+                        />
+                    </FormControl>
+
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="description">Description</FormLabel>
+                        <Textarea
+                            id="description"
+                            name="description"
+                            value={eventData.description}
+                            onChange={handleChange}
+                            placeholder="Enter event's description"
+                        />
+                    </FormControl>
+
+                    <FormControl>
+                        <FormLabel htmlFor="image">Image URL</FormLabel>
+                        <Input
+                            type="text"
+                            id="image"
+                            name="image"
+                            value={eventData.image}
+                            onChange={handleChange}
+                            placeholder="Enter image URL"
+                        />
+                    </FormControl>
+
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="category">Category</FormLabel>
+                        <Select
+                            id="category"
+                            name="category"
+                            value={eventData.category}
+                            onChange={handleChange}
+                        >
+                            <option value="Music">Music</option>
+                            <option value="Art">Art</option>
+                            <option value="Local markets">Local markets</option>
+                            <option value="Sport">Sport</option>
+                            <option value="Food&drinks">Food & Drinks</option>
+                            <option value="Events for kids">Events for Kids</option>
+                            <option value="Tours">Tours</option>
+                            <option value="Social gatherings">Social Gatherings</option>
+                            <option value="Other">Other</option>
+                        </Select>
+                    </FormControl>
+
+                    <FormControl isRequired>
+                        <FormLabel htmlFor="kiez">Kiez</FormLabel>
+                        <Select
+                            id="kiez"
+                            name="kiez"
+                            value={eventData.kiez}
+                            onChange={handleChange}
+                        >
+                            <option value="">Select a Kiez</option>
+                            {kiezOptions.map((kiez) => (
+                                <option key={kiez._id} value={kiez._id}>
+                                    {kiez.kiezName}
+                                </option>
+                            ))}
+                        </Select>
+                    </FormControl>
+
+                    <Button type="submit" colorScheme="blue" size="lg" width="full">
+                        Add Event
+                    </Button>
+                </VStack>
+            </form>
+        </Box>
+)
 
 }
 

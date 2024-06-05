@@ -13,7 +13,7 @@ const AuthProviderWrapper = ({ children }) => {
 
   
 
-  useEffect(() => {
+  
     const authenticateUser = async () => {
       if (token) {
         try {
@@ -40,9 +40,6 @@ const AuthProviderWrapper = ({ children }) => {
       setIsLoading(false);
     };
 
-    authenticateUser();
-  }, [token]);
-
   const storeToken = (token) => {
     localStorage.setItem('authToken', token);
     setToken(token);
@@ -56,7 +53,7 @@ const AuthProviderWrapper = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ loggedIn, isLoading, user, storeToken, removeToken }}>
+    <AuthContext.Provider value={{ loggedIn, isLoading, user, storeToken, removeToken, authenticateUser }}>
       {children}
     </AuthContext.Provider>
   );

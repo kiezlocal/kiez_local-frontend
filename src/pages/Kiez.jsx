@@ -12,12 +12,24 @@ const KiezGrid = () => {
   const [kiezOptions, setKiezOptions] = useState([]);
   const [filteredKiezPhoto, setFilteredKiezPhoto] = useState([]);
 
+  useEffect(() => {
+    axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
+    .then(response => {
+        console.log(response.data); 
+        setKiezOptions(response.data);
+        setFilteredKiezPhoto(response.data);
+    })
+    .catch(error => {
+        console.error("Error while fetching kiez information.", error);
+    });
+}, []);
 
 return (
   <div>
     <header></header>
-    <SearchBar setFilteredEvents={setFilteredKiezPhoto} setKiezOptions={setKiezOptions} />
-    <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">a
+    <SearchBar setFilteredKiezPhoto={setFilteredKiezPhoto} setKiezOptions={setKiezOptions} />
+
+    <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">
       {filteredKiezPhoto.map(kiez => (
         <Card key={kiez._id} borderWidth="1px" borderRadius="lg" overflow="hidden">
           {kiez.image && (
