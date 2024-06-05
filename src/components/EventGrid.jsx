@@ -34,12 +34,12 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
                   <CardBody>
                       <Stack mt="6" spacing="3">
                           <Heading size="md">{event.name}</Heading>
-                          <Text>{formatDate(event.date)}</Text>
-                          <Text>{event.startTime}</Text>
-                          <Text>{event.category}</Text>
-                  <Text>{event.address}</Text>
-                          <Text>{event.description}</Text>
-                          <Text>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
+                          <Text><b>Date:</b> {formatDate(event.date)}</Text>
+                          <Text><b>Time:</b> {event.startTime}</Text>
+                          <Text><b>Kiez:</b>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
+                          <Text><b>Category:</b> {event.category}</Text>
+                            <Text><b>Address:</b>{event.address}</Text>
+                          <Text><b>Description:</b>{event.description}</Text>
                       </Stack>
                   </CardBody>
                   <Divider />

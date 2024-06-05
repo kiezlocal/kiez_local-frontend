@@ -69,10 +69,6 @@ return(
     <div>
         <header>
        
-          <>
-            <button onClick={() => {/* handle add event */}}>Add Event</button>
-            <button onClick={() => {/* handle delete event */}}>Delete Event</button>
-          </>
        
 
         </header>
