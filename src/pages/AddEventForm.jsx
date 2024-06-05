@@ -18,6 +18,10 @@ const AddEventForm = () => {
 
 const navigate = useNavigate();
 
+const handleGoBack = () => {
+    window.history.back();
+  };
+
 const handleChange = (e) => {
     const { name, value } = e.target;
     setEventData({ ...eventData, [name]: value });
@@ -185,6 +189,7 @@ return(
                     <Button type="submit" colorScheme="blue" size="lg" width="full">
                         Add Event
                     </Button>
+                    <button onClick={handleGoBack}>Go back</button>
                 </VStack>
             </form>
         </Box>

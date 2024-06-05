@@ -7,11 +7,16 @@ import { Box } from '@chakra-ui/react'
 import { SimpleGrid, Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text, Image, Stack, Divider, Tooltip } from '@chakra-ui/react';
 
 
-
-
-
 const EventGrid = ({ events, onDelete, loggedIn }) => {
     const navigate = useNavigate(); 
+    const [detailedEvents, setDetailedEvents] = useState([]);
+
+    useEffect(() => {
+        const fetchDetailedEvents = async () => { 
+        };
+
+        fetchDetailedEvents();
+    }, [events]);
 
     const formatDate = (dateString) => {
         const options = { day: '2-digit', month: '2-digit', year: 'numeric' };

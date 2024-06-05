@@ -74,9 +74,6 @@ return(
         </header>
 <SearchBar setFilteredEvents={setFilteredEvents} setKiezOptions={setKiezOptions} />
 <EventGrid events={filteredEvents} onDelete={handleDelete} loggedIn={loggedIn} />
-<button>
-  <Link to="/events/addevent">Add events</Link>
-</button>
 {/* <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} /> */}
 {/*{loggedIn && <AddEventForm onEventAdded={handleEventAdded} kiezOptions={kiezOptions} />} */}
 {/* {displayNewEvent &&

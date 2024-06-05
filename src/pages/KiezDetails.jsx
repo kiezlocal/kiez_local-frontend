@@ -12,12 +12,17 @@ import {
   Container,
   VStack,
   Box,
-  Link
+  Link,
+  Button
 } from "@chakra-ui/react";
 
 const KiezDetails = () => {
   const { kiezId } = useParams();
   const [kiez, setKiez] = useState(null);
+
+  const handleGoBack = () => {
+    window.history.back();
+  };
 
 
   useEffect(() => {
@@ -61,7 +66,7 @@ const KiezDetails = () => {
               <Text py="2">
                 {kiez.description}
               </Text>
-
+              <Button onClick={handleGoBack}>Go Back</Button>
             </CardBody>
           </Stack>
         </Card>

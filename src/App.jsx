@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { ChakraProvider } from '@chakra-ui/react';
 import { AuthProviderWrapper } from './context/auth.context';
 import Navbar from './components/Navbar';
@@ -17,6 +17,7 @@ import TermsOfUse from './pages/TermsOfUse';
 import NotFound from './pages/NotFound';
 import AddEventForm from './pages/AddEventForm';
 import IsPrivate from './components/IsPrivate';
+import LocalKiezLogo from './assets/LocalKiez.svg';
 
 
 function App() {
@@ -24,6 +25,11 @@ function App() {
     <ChakraProvider>
       <AuthProviderWrapper>
         <Router>
+        <div style={{ display: "flex", justifyContent: "center" }}>
+            <Link to="/">
+              <img src={LocalKiezLogo} alt="LocalKiez Logo" style={{ height: "150px", marginRight: "150px" }} />
+            </Link>
+          </div>
           <Navbar />
           <div>
             <Routes>

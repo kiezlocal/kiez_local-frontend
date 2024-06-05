@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
 
+
 function Navbar() {
   const { isOpen, onToggle } = useDisclosure();
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);

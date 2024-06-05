@@ -18,6 +18,11 @@ const EventDetail = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
 
+  const handleGoBack = () => {
+    window.history.back();
+  };
+
+
   useEffect(() => {
     const fetchEvent = async () => {
       try {

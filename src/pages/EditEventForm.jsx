@@ -13,11 +13,16 @@ const EditEventForm = () => {
         description: '',
         image: '',
         category: '',
+        kiezOptions: ''
     });
 
     const [kiezOptions, setKiezOptions] = useState([]);
     const navigate = useNavigate();
     const { eventId } = useParams();
+
+    const handleGoBack = () => {
+        window.history.back();
+      };
 
     useEffect(() => {
         axios.get(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`)
@@ -168,6 +173,7 @@ const EditEventForm = () => {
 
 
                 <Button type="submit" colorScheme="blue" size="lg" width="full">Update Event</Button>
+                <button onClick={handleGoBack}>Go Back</button>
                 </VStack>
                 </form>
             </Box>
