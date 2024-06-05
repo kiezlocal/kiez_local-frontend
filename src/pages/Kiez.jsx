@@ -3,28 +3,22 @@ import axios from 'axios';
 import { Link } from 'react-router-dom'; 
 import "../App.css";
 import { Card, CardBody, Heading, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react"; 
+import SearchBar from '../components/Searchbar';
 
 
 
 
 const KiezGrid = () => {
-    const [kiezPhoto, setKiez] = useState([]);
+  const [kiezOptions, setKiezOptions] = useState([]);
+  const [filteredKiezPhoto, setFilteredKiezPhoto] = useState([]);
 
-
-useEffect(() => {
-    axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
-    .then(response => {
-        console.log(response.data); 
-        setKiez(response.data);
-    })
-    .catch(error => {
-        console.error("Error while fetching kiez information.", error);
-    });
-}, []);
 
 return (
-    <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">
-      {kiezPhoto.map(kiez => (
+  <div>
+    <header></header>
+    <SearchBar setFilteredEvents={setFilteredKiezPhoto} setKiezOptions={setKiezOptions} />
+    <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">a
+      {filteredKiezPhoto.map(kiez => (
         <Card key={kiez._id} borderWidth="1px" borderRadius="lg" overflow="hidden">
           {kiez.image && (
             <Image src={kiez.image} alt={kiez.kiezName || kiez.name} borderRadius="lg" />
@@ -51,6 +45,7 @@ return (
         </Card>
       ))}
     </SimpleGrid>
+    </div>
   );
 
 }

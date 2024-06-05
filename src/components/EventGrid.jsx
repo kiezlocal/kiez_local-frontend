@@ -1,9 +1,10 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import "../App.css";
+import "/src/App.css"
 import { useNavigate } from 'react-router-dom';
 import { Box } from '@chakra-ui/react'
-import { SimpleGrid, Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text, Image, Stack, Divider } from '@chakra-ui/react';
+// import {EventDetail} from "src/pages/EventDetails.jsx"
+import { SimpleGrid, Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text, Image, Stack, Divider, Tooltip } from '@chakra-ui/react';
 
 
 
@@ -17,38 +18,41 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
         return new Date(dateString).toLocaleDateString('de-DE', options);
     };
 
-   
+    const navigateToDetails = (eventId) => {
+      navigate(`/events/${eventId}`);
+
+    };
+
+
     return (
-        <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">
+      <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6"> 
           {events.map(event => (
-            <Card key={event._id} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden">
-              {event.image && (
-                <Image src={event.image} alt={event.name} borderRadius="lg" />
-              )}
-              <CardBody>
-                <Stack mt="6" spacing="3">
-                  <Heading size="md">{event.name}</Heading>
-                  <Text>{formatDate(event.date)}</Text>
-                  <Text>{event.startTime}</Text>
-                  <Text>{event.address}</Text>
-                  <Text>{event.description}</Text>
-                  <Text>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
-                </Stack>
-              </CardBody>
-              <Divider />
-              <CardFooter>
-                <ButtonGroup spacing="2">
-                  <Button variant="solid" colorScheme="blue" onClick={() => navigate(`/events/${event._id}/edit`)}>Edit</Button>
-                  {loggedIn && (
-                    <Button variant="ghost" colorScheme="blue" onClick={() => onDelete(event._id)}>Delete</Button>
+              <Card key={event._id} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => navigateToDetails(event._id)} className='cardToHover'>
+                  {event.image && (
+                      <Image src={event.image} alt={event.name} borderRadius="lg" />
                   )}
-                </ButtonGroup>
-              </CardFooter>
-            </Card>
+                  <CardBody>
+                      <Stack mt="6" spacing="3">
+                          <Heading size="md">{event.name}</Heading>
+                          <Text>{formatDate(event.date)}</Text>
+                          <Text>{event.startTime}</Text>
+                          <Text>{event.address}</Text>
+                          <Text>{event.description}</Text>
+                          <Text>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
+                      </Stack>
+                  </CardBody>
+                  <Divider />
+                  <CardFooter>
+                      <ButtonGroup spacing="2">
+                          <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
+                          {loggedIn && (
+                              <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
+                          )}
+                      </ButtonGroup>
+                  </CardFooter>
+              </Card>
           ))}
-        </SimpleGrid>
-      );
-
+      </SimpleGrid>
+  );
 }
-
 export default EventGrid;

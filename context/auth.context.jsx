@@ -11,6 +11,8 @@ const AuthProviderWrapper = ({ children }) => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(localStorage.getItem('authToken') || '');
 
+  
+
   useEffect(() => {
     const authenticateUser = async () => {
       if (token) {
