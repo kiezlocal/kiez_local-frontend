@@ -151,7 +151,7 @@ const EditEventForm = () => {
                     </Select>
                     </FormControl>
               
-             {/* <FormControl isRequired>
+             <FormControl isRequired>
               <FormLabel htmlFor="kiez">Kiez</FormLabel>
               <Select 
               name="kiez"
@@ -164,7 +164,7 @@ const EditEventForm = () => {
                 <option key={kiez._id} value={kiez._id}>{kiez.kiezName}</option>
               ))}
             </Select>
-            </FormControl>*/}
+            </FormControl>
 
 
                 <Button type="submit" colorScheme="blue" size="lg" width="full">Update Event</Button>
