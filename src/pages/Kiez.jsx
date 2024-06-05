@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom'; 
+import { Link, useNavigate } from 'react-router-dom'; 
 import "../App.css";
 import { Card, CardBody, Heading, Image, SimpleGrid, Stack, Text } from "@chakra-ui/react"; 
 import SearchBar from '../components/Searchbar';
@@ -11,6 +11,9 @@ import SearchBar from '../components/Searchbar';
 const KiezGrid = () => {
   const [kiezOptions, setKiezOptions] = useState([]);
   const [filteredKiezPhoto, setFilteredKiezPhoto] = useState([]);
+  
+  const navigate = useNavigate(); 
+
 
   useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
@@ -24,6 +27,11 @@ const KiezGrid = () => {
     });
 }, []);
 
+const navigateToDetails = (kiezId) => {
+  navigate(`/kiezs/${kiezId}`);
+
+};
+
 return (
   <div>
     <header></header>
@@ -31,7 +39,7 @@ return (
 
     <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">
       {filteredKiezPhoto.map(kiez => (
-        <Card key={kiez._id} borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <Card key={kiez._id} borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => navigateToDetails(kiez._id)} className='cardToHover' >
           {kiez.image && (
             <Image src={kiez.image} alt={kiez.kiezName || kiez.name} borderRadius="lg" />
           )}
