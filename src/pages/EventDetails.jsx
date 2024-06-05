@@ -63,12 +63,6 @@ const EventDetail = () => {
                 </Box>{" "}
                 {event.category}
               </Text>
-              <Text py="2">
-                <Box as="span" fontWeight="bold">
-                  Time:
-                </Box>{" "}
-                {new Date(event.date).toLocaleString()}
-              </Text>
 
               <Text py="2">
                 <Box as="span" fontWeight="bold">

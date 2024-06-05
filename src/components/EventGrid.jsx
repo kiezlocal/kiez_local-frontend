@@ -24,35 +24,42 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
     };
 
 
-    return (
-      <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6"> 
+      return (
+        <SimpleGrid columns={{ sm: 1, md: 4, lg: 4 }} spacing="6" padding="6">
           {events.map(event => (
-              <Card key={event._id} maxW="sm" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => navigateToDetails(event._id)} className='cardToHover'>
-                  {event.image && (
-                      <Image src={event.image} alt={event.name} borderRadius="lg" />
-                  )}
-                  <CardBody>
-                      <Stack mt="6" spacing="3">
-                          <Heading size="md">{event.name}</Heading>
-                          <Text><b>Date:</b> {formatDate(event.date)}</Text>
-                          <Text><b>Time:</b> {event.startTime}</Text>
-                          <Text><b>Kiez:</b>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
-                          <Text><b>Category:</b> {event.category}</Text>
-                            <Text><b>Address:</b>{event.address}</Text>
-                          <Text><b>Description:</b>{event.description}</Text>
-                      </Stack>
-                  </CardBody>
-                  <Divider />
-                  <CardFooter>
-                      <ButtonGroup spacing="2">
-                          <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
-                          <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
-                                                   
-                      </ButtonGroup>
-                  </CardFooter>
-              </Card>
+            <Card key={event._id} maxW="300px" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => navigateToDetails(event._id)} className='cardToHover'>
+              {event.image && (
+                <Box p="20px" pb="0"> 
+                  <Image 
+                    src={event.image} 
+                    alt={event.name} 
+                    borderRadius="lg" 
+                    objectFit="cover" 
+                    h="150px"
+                    w="100%"
+                  />
+                </Box>
+              )}
+              <CardBody>
+                <Stack mt="3" spacing="1"> 
+                  <Heading size="md" mt="0">{event.name}</Heading> 
+                  <Text><b>Date:</b> {formatDate(event.date)}</Text>
+                  <Text><b>Time:</b> {event.startTime}</Text>
+                  <Text><b>Kiez:</b> {event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
+                  <Text><b>Category:</b> {event.category}</Text>
+                  <Text><b>Address:</b> {event.address}</Text>
+                </Stack>
+              </CardBody>
+              <Divider />
+              <CardFooter>
+                <ButtonGroup spacing="2">
+                  <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
+                  <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
+                </ButtonGroup>
+              </CardFooter>
+            </Card>
           ))}
-      </SimpleGrid>
-  );
+        </SimpleGrid>
+      );
 }
 export default EventGrid;

@@ -46,7 +46,7 @@ return (
           <CardBody>
             <Stack spacing="3">
               <Heading mb={3} fontSize="2xl">{kiez.kiezName || kiez.name}</Heading>
-              <Text>{kiez.description}</Text>
+              {/* <Text>{kiez.description}</Text> */}
               <div>
                 {kiez.events.length > 0 ? (
                   <ul>

@@ -2,6 +2,18 @@ import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import {AuthContext} from '../context/auth.context'
+import {
+  Stack,
+  Flex,
+  Heading,
+  FormControl,
+  FormLabel,
+  Input,
+  Button,
+  Checkbox,
+  Image,
+  Text,
+} from '@chakra-ui/react';
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -33,11 +45,11 @@ const LoginPage = () => {
       });
   };
 
-  return (
-    <div className="LoginPage">
-      <h1>Login</h1>
+ 
+    // <div className="LoginPage">
+    //   <h1>Login</h1>
 
-      <form onSubmit={handleLoginSubmit}>
+      {/* <form onSubmit={handleLoginSubmit}>
         <label>Email:</label>
         <input type="email" name="email" value={email} onChange={handleEmailChange} />
 
@@ -55,7 +67,43 @@ const LoginPage = () => {
 
       <p>Don't have an account yet?</p>
       <Link to={"/signup"}> Sign Up</Link>
-    </div>
+    </div> */}
+    return (
+<Stack minH={'100vh'} direction={{ base: 'column', md: 'row' }}>
+      <Flex p={8} flex={1} align={'center'} justify={'center'}>
+        <Stack spacing={4} w={'full'} maxW={'md'}>
+          <Heading fontSize={'2xl'}>Sign in to your account</Heading>
+          <form onSubmit={handleLoginSubmit}>
+            <FormControl id="email" isRequired>
+              <FormLabel>Email address</FormLabel>
+              <Input type="email" name="email" value={email} onChange={handleEmailChange} />
+            </FormControl>
+            <FormControl id="password" isRequired mt={4}>
+              <FormLabel>Password</FormLabel>
+              <Input type="password" name="password" value={password} onChange={handlePasswordChange} />
+            </FormControl>
+            {errorMessage && <Text color="red.500" mt={2}>{errorMessage}</Text>}
+            <Stack spacing={6} mt={5}>
+              
+              <Button type="submit" colorScheme={'blue'} variant={'solid'}>
+                Sign in
+              </Button>
+            </Stack>
+          </form>
+          <Text mt={4}>Don't have an account yet? <Link color={'blue.500'} to={"/signup"}>Sign Up</Link></Text>
+        </Stack>
+      </Flex>
+      <Flex flex={1}>
+        <Image
+          alt={'Login Image'}
+          objectFit={'cover'}
+          src={
+            'https://berlinstreetart.com/wp-content/uploads/2016/03/Klunkerkranich-Berlin-via-Facebook.jpg'
+          }
+        />
+      </Flex>
+    </Stack>
+
   );
 };
 
