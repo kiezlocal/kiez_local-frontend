@@ -68,16 +68,12 @@ return(
 
     <div>
         <header>
-        {isLoading ? (
-          <p>Loading...</p>
-        ) : loggedIn ? (
+       
           <>
             <button onClick={() => {/* handle add event */}}>Add Event</button>
             <button onClick={() => {/* handle delete event */}}>Delete Event</button>
           </>
-        ) : (
-          <p>Login to manage events</p>
-        )}
+       
 
         </header>
 <SearchBar setFilteredEvents={setFilteredEvents} setKiezOptions={setKiezOptions} />

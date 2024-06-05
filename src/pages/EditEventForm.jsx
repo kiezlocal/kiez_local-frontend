@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Box, Button, FormControl, FormLabel, Input, Select, Textarea, VStack, Heading } from '@chakra-ui/react';
 
 
-
 const EditEventForm = () => {
     const [formDetails, setFormDetails] = useState({
         name: '',
@@ -14,7 +13,6 @@ const EditEventForm = () => {
         description: '',
         image: '',
         category: '',
-        kiezId: ''
     });
 
     const [kiezOptions, setKiezOptions] = useState([]);
@@ -29,8 +27,9 @@ const EditEventForm = () => {
             .catch(error => {
                 console.error("Error while fetching event information.", error);
             });
-    });
+    }, [eventId]);
 
+    
     axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
         .then(response => {
             setKiezOptions(response.data);
@@ -152,7 +151,7 @@ const EditEventForm = () => {
                     </Select>
                     </FormControl>
               
-              <FormControl isRequired>
+             {/* <FormControl isRequired>
               <FormLabel htmlFor="kiez">Kiez</FormLabel>
               <Select 
               name="kiez"
@@ -165,7 +164,7 @@ const EditEventForm = () => {
                 <option key={kiez._id} value={kiez._id}>{kiez.kiezName}</option>
               ))}
             </Select>
-            </FormControl>
+            </FormControl>*/}
 
 
                 <Button type="submit" colorScheme="blue" size="lg" width="full">Update Event</Button>

@@ -1,85 +1,59 @@
-import React, { useState, useContext } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import { AuthContext } from '../../context/auth.context';
 
-// function LoginPage(props){
-  
+const API_URL = import.meta.env.VITE_API_URL;
 
-
-
-const Login = () => {
-  const [formDetails, setFormDetails] = useState({
-    email: '',
-    password: ''
-  });
-  const { storeToken, setIsLoggedIn, setUser } = useContext(AuthContext);
-
+const LoginPage = () => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [errorMessage, setErrorMessage] = useState(undefined);
   const navigate = useNavigate();
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
+  const handleEmailChange = (e) => setEmail(e.target.value);
+  const handlePasswordChange = (e) => setPassword(e.target.value);
+
+  const handleLoginSubmit = (e) => {
+    e.preventDefault();
+    const requestBody = { email, password };
+
+    axios.post(`${API_URL}/auth/login`, requestBody)
+      .then((response) => {
+        const authToken = response.data.authToken;
+        console.log("JWT token", authToken);
+        localStorage.setItem("authToken", authToken);
+        navigate("/");
+      })
+      .catch((error) => {
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-
-
-    try {
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, formDetails);
-        if (response.status === 200) {
-          const data = response.data;
-          storeToken(data.authToken);
-          setUser(data.user);
-          setIsLoggedIn(true);
-          alert('Login successful!');
-          navigate('/');
-        } else {
-          alert('Login failed: ' + response.data.message);
-        }
-      } catch (error) {
-        console.error('Error logging in:', error);
-        alert('Login failed');
-      }
-    };
-  
-
   return (
-    <div className="login-container">
-      <h1 className="login-title">Login</h1>
-      <p className="login-text">Enter your email address and password to successfully login.</p>
-      <form onSubmit={handleSubmit} className="login-form">
-        <div className="form-group">
-          <label htmlFor="email">Email address</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formDetails.email}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formDetails.password}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button">Login</button>
+    <div className="LoginPage">
+      <h1>Login</h1>
+
+      <form onSubmit={handleLoginSubmit}>
+        <label>Email:</label>
+        <input type="email" name="email" value={email} onChange={handleEmailChange} />
+
+        <label>Password:</label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          onChange={handlePasswordChange}
+        />
+
+        <button type="submit">Login</button>
       </form>
-      <p className="register-link">
-        New user? <Link to="/register">Register</Link>
-      </p>
+      {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+      <p>Don't have an account yet?</p>
+      <Link to={"/signup"}> Sign Up</Link>
     </div>
   );
 };
 
-export default Login;
+export default LoginPage;

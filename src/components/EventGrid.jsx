@@ -36,7 +36,8 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
                           <Heading size="md">{event.name}</Heading>
                           <Text>{formatDate(event.date)}</Text>
                           <Text>{event.startTime}</Text>
-                          <Text>{event.address}</Text>
+                          <Text>{event.category}</Text>
+                  <Text>{event.address}</Text>
                           <Text>{event.description}</Text>
                           <Text>{event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
                       </Stack>
@@ -47,7 +48,7 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
                           <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
                           {loggedIn && (
                               <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
-                          )}
+                          )}                         
                       </ButtonGroup>
                   </CardFooter>
               </Card>

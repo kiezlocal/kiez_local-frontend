@@ -1,22 +1,45 @@
-import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from "react";
+import { Link } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
 
-const Navbar = () => {
-    return (
-        <nav className="navbar">
-            <div className="navbar-left">
-                <Link to="/">
-                    <img src="https://via.placeholder.com/150" alt="Logo" className="logo" />
-                </Link>
-                <Link to="/" className="nav-link">Home</Link>
-                <Link to="/kiez" className="nav-link">Kiez</Link>
-                <Link to="/about" className="nav-link">About</Link>
-            </div>
-            <div className="navbar-right">
-                <Link to="/login" className="nav-link">Login</Link>
-            </div>
-        </nav>
-    );
+function Navbar() {
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+
+  const handleLogout = () => {
+    logOutUser();
+  };
+
+  return (
+    <nav>
+      <Link to="/">
+        <button>Home</button>
+      </Link>
+
+      {isLoggedIn && (
+        <>
+          <Link to="/events">
+            <button>Events</button>
+          </Link>
+
+          <button onClick={handleLogout}>Logout</button>
+          <span>{user && user.name}</span>
+        </>
+      )}
+
+      {!isLoggedIn && (
+        <>
+          <Link to="/signup">
+            {" "}
+            <button>Sign Up</button>{" "}
+          </Link>
+          <Link to="/login">
+            {" "}
+            <button>Login</button>{" "}
+          </Link>
+        </>
+      )}
+    </nav>
+  );
 }
 
 export default Navbar;
