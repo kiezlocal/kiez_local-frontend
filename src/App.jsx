@@ -18,6 +18,7 @@ import NotFound from './pages/NotFound';
 import AddEventForm from './pages/AddEventForm';
 import IsPrivate from './components/IsPrivate';
 import LocalKiezLogo from './assets/LocalKiez.svg';
+import PrivacyNotice from './pages/PrivacyNotice';
 
 
 function App() {
@@ -39,6 +40,7 @@ function App() {
               <Route path="/login" element={<Login />} />
               <Route path="/kiez" element={<KiezGrid />} />
               <Route path="/imprint" element={<Imprint />} />
+              <Route path="/privacy" element={<PrivacyNotice />} />
               <Route path="/terms" element={<TermsOfUse />} />
               <Route path="/events/:eventId" element={<EventDetails />} />
               <Route path="/kiezs/:kiezId" element={<KiezDetails />} />

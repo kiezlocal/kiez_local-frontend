@@ -10,6 +10,7 @@ const Footer = () => {
                 <Box as="img" src="/src/assets/LocalKiez.svg" alt="LocalKiez Logo" w={250} h={250} />
                 <Stack direction={'row'} spacing={6}>
                     <Link to="/imprint">Imprint</Link>
+                    <Link to="/privacy">Privacy Notice</Link>
                     <Link to="/terms">Terms of Use</Link>
                 </Stack>
             </Container>

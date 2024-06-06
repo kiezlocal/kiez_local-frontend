@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 import {
   Card,
   CardBody,
@@ -12,6 +13,7 @@ import {
   Container,
   VStack,
   Box,
+  Button
   Button
 } from "@chakra-ui/react";
 
@@ -76,6 +78,12 @@ const EventDetail = () => {
                 </Box>{" "}
                 {new Date(event.date).toLocaleString()}
               </Text>
+              <Text py="2">
+                <Box as="span" fontWeight="bold">
+                  Kiez:
+                </Box>{" "}
+                {event.kiez.kiezName}
+              </Text>
 
               <Text py="2">
                 <Box as="span" fontWeight="bold">
@@ -83,10 +91,23 @@ const EventDetail = () => {
                 </Box>{" "}
                 {event.address}
               </Text>
-
-              <Text py="2">{event.description}</Text>
-              <Button onClick={handleGoBack}>Go Back</Button>
-
+              <Text py="2">
+                <Box as="span" fontWeight="bold">
+                Description:
+                </Box>{" "}
+                {event.description}
+              </Text>
+              <Text py="4">
+  <Box as="span" fontWeight="bold">
+    Website:
+  </Box>{" "}
+  <a href={event.website} target="_blank" rel="noopener noreferrer" style={{ color: 'blue', textDecoration: 'underline' }}>{event.website}</a>
+</Text>
+              <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }} mr="4" > Edit </Button>
+                  <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }} mr="4" > Delete </Button>              <p> </p>
+                  <Box mt="4">
+          <Button onClick={handleGoBack}>Go Back</Button>
+        </Box>
             </CardBody>
           </Stack>
         </Card>

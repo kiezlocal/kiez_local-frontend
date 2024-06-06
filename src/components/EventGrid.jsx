@@ -1,14 +1,16 @@
-import {useEffect, useState} from 'react';
+import {useEffect, useState, useContext} from 'react';
 import axios from 'axios';
 import "/src/App.css"
 import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Box } from '@chakra-ui/react'
 // import {EventDetail} from "src/pages/EventDetails.jsx"
 import { SimpleGrid, Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text, Image, Stack, Divider, Tooltip, Link } from '@chakra-ui/react';
+import { AuthContext } from '../context/auth.context';
 
 
 const EventGrid = ({ events, onDelete, loggedIn }) => {
     const navigate = useNavigate(); 
+    const { isLoggedIn } = useContext(AuthContext);
     const [detailedEvents, setDetailedEvents] = useState([]);
 
     useEffect(() => {
@@ -35,6 +37,16 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
       navigate(`/events/${eventId}`);
 
     };
+
+    const handleDelete = (eventId, e) => {
+        e.stopPropagation();
+        if (isLoggedIn) {
+          onDelete(eventId);
+        } else {
+          navigate('/login');
+        }
+      };
+    
 
 
       return (
@@ -73,7 +85,7 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
               <CardFooter>
                 <ButtonGroup spacing="2">
                   <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
-                  <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }}>Delete</Button>
+                  <Button variant="ghost" colorScheme="blue" onClick={(e) => handleDelete(event._id, e)}>Delete</Button>
                 </ButtonGroup>
               </CardFooter>
             </Card>
