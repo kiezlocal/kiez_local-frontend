@@ -91,7 +91,11 @@ const EventDetail = () => {
               </Text>
 
               <Text py="2">{event.description}</Text>
-              <Button onClick={handleGoBack}>Go Back</Button>
+              <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }} mr="4" > Edit </Button>
+                  <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }} mr="4" > Delete </Button>              <p> </p>
+                  <Box mt="4">
+          <Button onClick={handleGoBack}>Go Back</Button>
+        </Box>
             </CardBody>
           </Stack>
         </Card>
