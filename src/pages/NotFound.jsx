@@ -11,6 +11,7 @@ const NotFound = () => {
           <br />
           <p>Please check the URL or go back to the <a href="/">homepage</a>.</p>
           <br />
+
         </div>
       </div>
     </div>
