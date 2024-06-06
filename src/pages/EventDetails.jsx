@@ -14,7 +14,6 @@ import {
   VStack,
   Box,
   Button
-  Button
 } from "@chakra-ui/react";
 
 const EventDetail = () => {
@@ -78,12 +77,13 @@ const EventDetail = () => {
                 </Box>{" "}
                 {new Date(event.date).toLocaleString()}
               </Text>
+              {/* kiez: eventKiez ? eventKiez.kiez : "Unknown Kiez"
               <Text py="2">
                 <Box as="span" fontWeight="bold">
                   Kiez:
                 </Box>{" "}
                 {event.kiez.kiezName}
-              </Text>
+              </Text> */}
 
               <Text py="2">
                 <Box as="span" fontWeight="bold">
