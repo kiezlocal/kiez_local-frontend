@@ -239,6 +239,16 @@ const EditEventForm = () => {
               ))}
             </Select>
             </FormControl>
+            <FormControl>
+              <FormLabel htmlFor="website">Website</FormLabel>
+                    <Input
+                        type="text"
+                        id="website"
+                        name="website"
+                        value={formDetails.website}
+                        onChange={handleChange}
+                    />
+                    </FormControl>
 
 
                 <Button type="submit" colorScheme="blue" size="lg" width="full">Update Event</Button>
