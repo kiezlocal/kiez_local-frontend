@@ -12,6 +12,7 @@ import {
   Container,
   VStack,
   Box,
+  Button
 } from "@chakra-ui/react";
 
 const EventDetail = () => {
@@ -84,7 +85,7 @@ const EventDetail = () => {
               </Text>
 
               <Text py="2">{event.description}</Text>
-
+              <Button onClick={handleGoBack}>Go Back</Button>
             </CardBody>
           </Stack>
         </Card>
