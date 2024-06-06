@@ -142,11 +142,11 @@ function handleInputTime(e) {
 
 return (
     <ChakraProvider theme={theme}>
-        <Box as="form" onSubmit={handleSubmitSearch} p={4} m={4} boxShadow="md" borderRadius="md">
-            <Flex align="center" justify="space-around" mb={4}>
-                <Box>
+        <Box as="form" onSubmit={handleSubmitSearch} p={10} m={4} mt={0} boxShadow='md'>
+            <Flex align="center" justify="center" mb={4}>
+                <Box mr={10}> 
                     <FormLabel htmlFor="category">Category</FormLabel>
-                    <Select id="category-select" value={searchInfo.category} onChange={handleInputCategory} placeholder='All' w={[200, 250, 300]}>
+                    <Select id="category-select" value={searchInfo.category} onChange={handleInputCategory} placeholder='All' w={[200, 250, 300]}  borderColor='gray.400' backgroundColor="white">
                         <option value="Music">Music</option>
                         <option value="Art">Art</option>
                         <option value="Local markets">Local markets</option>
@@ -159,9 +159,9 @@ return (
                     </Select>
                 </Box>
 
-                <Box>
+                <Box mr={10}>
                     <FormLabel htmlFor="kiez-select">Neighbourhood</FormLabel>
-                    <Select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez} placeholder='All' w={[200, 250, 300]}>
+                    <Select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez} placeholder='All' w={[200, 250, 300]} borderColor='gray.400' backgroundColor="white">
                         <option value="Pankow">Pankow</option>
                         <option value="Mitte">Mitte</option>
                         <option value="Reinkendorf">Reinkendorf</option>
@@ -177,18 +177,16 @@ return (
                     </Select>
                 </Box>
 
-                <Box>
+                <Box mr={1}>
                     <FormLabel htmlFor="time-select">Time</FormLabel>
-                    <Select id="time-select" value={searchInfo.time} onChange={handleInputTime} placeholder='All' w={[200, 250, 300]}>
+                    <Select id="time-select" value={searchInfo.time} onChange={handleInputTime} placeholder='All' w={[200, 250, 300]}  borderColor='gray.400' backgroundColor="white">
                         <option value="Next 3 days">Next 3 days</option>
                         <option value="Next 7 days">Next 7 days</option>
                         <option value="Next month">Next month</option>
                     </Select>
                 </Box>
-            </Flex>
-
-            <Flex justify="flex-end">
-                <Button type='submit' colorScheme='teal' size='sm'>Search</Button>
+           
+                <Button type='submit' colorScheme='teal' size='md' alignSelf="flex-end" ml={10}>Search</Button>
             </Flex>
         </Box>
     </ChakraProvider>

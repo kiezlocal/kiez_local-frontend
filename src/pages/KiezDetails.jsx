@@ -45,7 +45,7 @@ const KiezDetails = () => {
 
   return (
   
-<Container maxW="8xl" mb="0">
+<Container maxW="8xl">
   <Button onClick={handleGoBack} ml="10px" mt="20px">Go Back</Button>
       <Center bg="white" h="600px" color="gray">
         <Card

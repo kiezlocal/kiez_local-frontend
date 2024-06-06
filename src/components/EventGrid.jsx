@@ -52,7 +52,7 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
       return (
         <SimpleGrid columns={{ sm: 1, md: 4, lg: 4 }} spacing="6" padding="6">
           {events.map(event => (
-            <Card key={event._id} maxW="300px" borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => navigateToDetails(event._id)} className='cardToHover'>
+            <Card key={event._id} maxW="300px" borderWidth="1px" borderRadius="lg" borderColor="gray.300" overflow="hidden" onClick={() => navigateToDetails(event._id)} className='cardToHover'>
               {event.image && (
                 <Box p="20px" pb="0"> 
                   <Image 
@@ -84,8 +84,8 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
               <Divider />
               <CardFooter>
                 <ButtonGroup spacing="2">
-                  <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
-                  <Button variant="ghost" colorScheme="blue" onClick={(e) => handleDelete(event._id, e)}>Delete</Button>
+                  <Button variant="solid" colorScheme='teal' onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }}>Edit</Button>
+                  <Button variant="ghost" colorScheme="teal" onClick={(e) => handleDelete(event._id, e)}>Delete</Button>
                 </ButtonGroup>
               </CardFooter>
             </Card>

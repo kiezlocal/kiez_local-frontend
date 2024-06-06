@@ -35,11 +35,11 @@ const navigateToDetails = (kiezId) => {
 return (
   <div>
     <header></header>
-    <SearchBar setFilteredKiezPhoto={setFilteredKiezPhoto} setKiezOptions={setKiezOptions} />
+    {/* <SearchBar setFilteredKiezPhoto={setFilteredKiezPhoto} setKiezOptions={setKiezOptions} /> */}
 
     <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">
       {filteredKiezPhoto.map(kiez => (
-        <Card key={kiez._id} borderWidth="1px" borderRadius="lg" overflow="hidden" onClick={() => navigateToDetails(kiez._id)} className='cardToHover' >
+        <Card key={kiez._id} borderWidth="1px" borderRadius="lg" borderColor="gray.300" overflow="hidden" onClick={() => navigateToDetails(kiez._id)} className='cardToHover' >
           {kiez.image && (
             <Image src={kiez.image} alt={kiez.kiezName || kiez.name} borderRadius="lg" />
           )}

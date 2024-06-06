@@ -6,10 +6,10 @@ import AddEventForm from "./AddEventForm";
 import "/src/pages/Homepage.css";
 import { AuthContext } from "../../context/auth.context";
 
+
 import { ChakraProvider, Alert, AlertIcon, AlertTitle, AlertDescription, useDisclosure, CloseButton } from '@chakra-ui/react';
 
 import { Link } from 'react-router-dom';
-
 
 //Functions:
 
@@ -22,6 +22,12 @@ const Homepage = () => {
     const {loggedIn, isLoading} = useContext(AuthContext);
 
     const { isOpen, onClose, onOpen } = useDisclosure();
+
+    const styles = {
+        main: {
+            backgroundColor: "white"
+        }
+    }
 
 
     // const navigate = useNavigate();
@@ -83,7 +89,7 @@ function CompExample() {
 return(
   <ChakraProvider>
 
-    <div>
+    <div className="main" style={styles.main}>
         <header>
         </header>
 
