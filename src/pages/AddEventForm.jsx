@@ -14,6 +14,7 @@ const AddEventForm = () => {
         image: "",
         category: "",
         kiez: '',
+        website: '',
     });
 
 const navigate = useNavigate();
@@ -188,6 +189,17 @@ return(
                                 </option>
                             ))}
                         </Select>
+                    </FormControl>
+                    <FormControl>
+                        <FormLabel htmlFor="website">Website</FormLabel>
+                        <Input
+                            type="text"
+                            id="website"
+                            name="website"
+                            value={eventData.website}
+                            onChange={handleChange}
+                            placeholder="Enter website URL"
+                        />
                     </FormControl>
 
                     <Button type="submit" colorScheme="blue" size="lg" width="full">
