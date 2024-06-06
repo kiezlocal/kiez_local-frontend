@@ -80,12 +80,12 @@ const EventDetail = () => {
                 {new Date(event.date).toLocaleString()}
               </Text>
              {/* kiez: eventKiez ? eventKiez.kiez : "Unknown Kiez" */}
-             {/* <Text py="2">
+             <Text py="2">
                 <Box as="span" fontWeight="bold">
                   Kiez:
                 </Box>{" "}
                 {event.kiez ? event.kiez.kiezName : "Unknown Kiez"}
-              </Text> */}
+              </Text> 
 
               <Text py="2">
                 <Box as="span" fontWeight="bold">
