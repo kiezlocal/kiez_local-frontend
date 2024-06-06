@@ -1,10 +1,10 @@
 import {useEffect, useState} from 'react';
 import axios from 'axios';
 import "/src/App.css"
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link as RouterLink } from 'react-router-dom';
 import { Box } from '@chakra-ui/react'
 // import {EventDetail} from "src/pages/EventDetails.jsx"
-import { SimpleGrid, Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text, Image, Stack, Divider, Tooltip } from '@chakra-ui/react';
+import { SimpleGrid, Card, CardHeader, CardBody, CardFooter, Button, ButtonGroup, Heading, Text, Image, Stack, Divider, Tooltip, Link } from '@chakra-ui/react';
 
 
 const EventGrid = ({ events, onDelete, loggedIn }) => {
@@ -13,7 +13,15 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
 
     useEffect(() => {
         const fetchDetailedEvents = async () => { 
-        };
+          const detailedEventsData = await Promise.all(
+            events.map(async (event) => {
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/events/${event._id}`);
+                console.log(response.data); 
+                return response.data;
+            })
+        );
+        setDetailedEvents(detailedEventsData);
+    };
 
         fetchDetailedEvents();
     }, [events]);
@@ -50,7 +58,13 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
                   <Heading size="md" mt="0">{event.name}</Heading> 
                   <Text><b>Date:</b> {formatDate(event.date)}</Text>
                   <Text><b>Time:</b> {event.startTime}</Text>
-                  <Text><b>Kiez:</b> {event.kiez ? event.kiez.kiezName : 'Unknown Kiez'}</Text>
+                  {event.kiez && (
+                  <Text><b>Kiez:</b><Link as={RouterLink} to={`/kiezs/${event.kiez._id}`}>{event.kiez.kiezName}</Link></Text>
+                  )}
+                  {!event.kiez && (
+                        <Text><b>Kiez:</b> Unknown Kiez</Text>
+
+                  )}
                   <Text><b>Category:</b> {event.category}</Text>
                   <Text><b>Address:</b> {event.address}</Text>
                 </Stack>

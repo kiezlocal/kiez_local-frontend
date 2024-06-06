@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, Link as RouterLink } from 'react-router-dom';
 import {
   Card,
   CardBody,
@@ -87,7 +87,7 @@ const KiezDetails = () => {
                 <Heading mb={3} fontSize="lg">{event.name}</Heading>
                 <Text>{new Date(event.date).toLocaleDateString()}</Text>
                 <Text>{event.address}</Text>
-                <Link to={`/events/${event._id}`}>Read more</Link>
+                <Link as={RouterLink} to={`/events/${event._id}`}>Read more</Link>
               </Stack>
             </CardBody>
           </Card>
