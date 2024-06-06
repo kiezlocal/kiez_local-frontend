@@ -67,18 +67,18 @@ const EventGrid = ({ events, onDelete, loggedIn }) => {
               )}
               <CardBody>
                 <Stack mt="3" spacing="1"> 
-                  <Heading size="md" mt="0">{event.name}</Heading> 
+                  <Heading size="md" mt="0" mb="10px">{event.name}</Heading> 
                   <Text><b>Date:</b> {formatDate(event.date)}</Text>
                   <Text><b>Time:</b> {event.startTime}</Text>
                   {event.kiez && (
                   <Text><b>Kiez:</b><Link as={RouterLink} to={`/kiezs/${event.kiez._id}`}>{event.kiez.kiezName}</Link></Text>
                   )}
                   {!event.kiez && (
-                        <Text><b>Kiez:</b> Unknown Kiez</Text>
+                        <Text><b>Kiez: </b> Unknown Kiez</Text>
 
                   )}
                   <Text><b>Category:</b> {event.category}</Text>
-                  <Text><b>Address:</b> {event.address}</Text>
+                  {/* <Text><b>Address:</b> {event.address}</Text> */}
                 </Stack>
               </CardBody>
               <Divider />

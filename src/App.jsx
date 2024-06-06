@@ -28,7 +28,7 @@ function App() {
         <Router>
         <div style={{ display: "flex", justifyContent: "center" }}>
             <Link to="/">
-              <img src={LocalKiezLogo} alt="LocalKiez Logo" style={{ height: "150px", marginRight: "150px" }} />
+              <img src={LocalKiezLogo} alt="LocalKiez Logo" style={{ height: "130px", marginRight: "150px" }} />
             </Link>
           </div>
           <Navbar />

@@ -47,7 +47,7 @@ return (
             <Stack spacing="3">
               <Heading mb={3} fontSize="2xl">{kiez.kiezName || kiez.name}</Heading>
               {/* <Text>{kiez.description}</Text> */}
-              <div>
+              {/* <div>
                 {kiez.events.length > 0 ? (
                   <ul>
                     {kiez.events.map(event => (
@@ -59,7 +59,7 @@ return (
                 ) : (
                   <Text>No events available.</Text>
                 )}
-              </div>
+              </div> */}
             </Stack>
           </CardBody>
         </Card>

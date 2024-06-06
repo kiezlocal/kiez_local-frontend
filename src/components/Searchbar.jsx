@@ -143,10 +143,10 @@ function handleInputTime(e) {
 return (
     <ChakraProvider theme={theme}>
         <Box as="form" onSubmit={handleSubmitSearch} p={4} m={4} boxShadow="md" borderRadius="md">
-            <Flex align="center" justify="space-between" mb={4}>
-                <Box mx={2}>
+            <Flex align="center" justify="space-around" mb={4}>
+                <Box>
                     <FormLabel htmlFor="category">Category</FormLabel>
-                    <Select id="category-select" value={searchInfo.category} onChange={handleInputCategory} placeholder='All' w={[250, 300, 400]}>
+                    <Select id="category-select" value={searchInfo.category} onChange={handleInputCategory} placeholder='All' w={[200, 250, 300]}>
                         <option value="Music">Music</option>
                         <option value="Art">Art</option>
                         <option value="Local markets">Local markets</option>
@@ -159,9 +159,9 @@ return (
                     </Select>
                 </Box>
 
-                <Box mx={2}>
+                <Box>
                     <FormLabel htmlFor="kiez-select">Neighbourhood</FormLabel>
-                    <Select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez} placeholder='All' w={[250, 300, 400]}>
+                    <Select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez} placeholder='All' w={[200, 250, 300]}>
                         <option value="Pankow">Pankow</option>
                         <option value="Mitte">Mitte</option>
                         <option value="Reinkendorf">Reinkendorf</option>
@@ -177,9 +177,9 @@ return (
                     </Select>
                 </Box>
 
-                <Box mx={2}>
+                <Box>
                     <FormLabel htmlFor="time-select">Time</FormLabel>
-                    <Select id="time-select" value={searchInfo.time} onChange={handleInputTime} placeholder='All' w={[250, 300, 400]}>
+                    <Select id="time-select" value={searchInfo.time} onChange={handleInputTime} placeholder='All' w={[200, 250, 300]}>
                         <option value="Next 3 days">Next 3 days</option>
                         <option value="Next 7 days">Next 7 days</option>
                         <option value="Next month">Next month</option>

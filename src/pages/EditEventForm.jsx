@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { Box, Button, FormControl, FormLabel, Input, Select, Textarea, VStack, Heading } from '@chakra-ui/react';
+import { Box, Button, FormControl, FormLabel, Input, Select, Textarea, VStack, Heading, Alert, AlertIcon, AlertTitle, AlertDescription } from '@chakra-ui/react';
 
 
 const EditEventForm = () => {
@@ -17,6 +17,7 @@ const EditEventForm = () => {
     });
 
     const [kiezOptions, setKiezOptions] = useState([]);
+    const [alertStatus, setAlertStatus] = useState(null);
     const navigate = useNavigate();
     const { eventId } = useParams();
 
@@ -34,7 +35,7 @@ const EditEventForm = () => {
             });
     }, [eventId]);
 
-    
+    useEffect(() => {
     axios.get(`${import.meta.env.VITE_API_URL}/api/kiez`)
         .then(response => {
             setKiezOptions(response.data);
@@ -42,11 +43,12 @@ const EditEventForm = () => {
         .catch(error => {
             console.error("Error while fetching kiez options.", error);
         });
+    }, []);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormDetails({ ...formDetails, [name]: value });
-    };
+    }; 
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,18 +57,85 @@ const EditEventForm = () => {
             const response = await axios.put(`${import.meta.env.VITE_API_URL}/api/events/${eventId}`, formDetails);
 
             if (response.status === 200) {
-                alert('Event updated successfully');
-                navigate('/'); 
+                setAlertStatus('success');
+                setTimeout(() => {
+                navigate('/');
+                }, 2500); 
             } else {
-                alert('Failed to update event');
+                setAlertStatus('error');
+                setTimeout(() => {
+                }, 2500);
             }
         } catch (error) {
             console.error('Error updating event:', error);
+            setAlertStatus('error');
+
         }
     };
 
     return (
-        <Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
+        
+         <Box position="relative">
+        <Box position="absolute" top="10px" left="10px">
+            <Button onClick={handleGoBack} colorScheme="teal" ml="10px">Go Back</Button>
+        </Box>
+        <Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg" mt="20px">
+
+        {alertStatus === 'success' && (
+                    <Alert
+                        status='success'
+                        variant='subtle'
+                        flexDirection='column'
+                        alignItems='center'
+                        justifyContent='center'
+                        textAlign='center'
+                        height='200px'
+                        mb={4}
+                        position="fixed"
+                        bottom="10px"
+                        left="50%"
+                        transform="translateX(-50%)"
+                        width="90%"
+                        maxWidth="md"
+                        zIndex={9999}
+                    >
+                        <AlertIcon boxSize='40px' mr={0} />
+                        <AlertTitle mt={4} mb={1} fontSize='lg'>
+                            Event updated successfully!
+                        </AlertTitle>
+                        <AlertDescription maxWidth='sm'>
+                            The event has been updated. You will be redirected shortly.
+                        </AlertDescription>
+                    </Alert>
+                )}
+                {alertStatus === 'error' && (
+                    <Alert
+                        status='error'
+                        variant='subtle'
+                        flexDirection='column'
+                        alignItems='center'
+                        justifyContent='center'
+                        textAlign='center'
+                        height='200px'
+                        mb={4}
+                        position="fixed"
+                        bottom="10px"
+                        left="50%"
+                        transform="translateX(-50%)"
+                        width="90%"
+                        maxWidth="md"
+                        zIndex={9999}
+                    >
+                        <AlertIcon boxSize='40px' mr={0} />
+                        <AlertTitle mt={4} mb={1} fontSize='lg'>
+                            Failed to update event!
+                        </AlertTitle>
+                        <AlertDescription maxWidth='sm'>
+                            There was an error updating the event. Please try again.
+                        </AlertDescription>
+                    </Alert>
+                )}
+
             <form onSubmit={handleSubmit}>
                 <Heading mb={6} size="lg">Edit Event</Heading>
                 <VStack spacing={4} align="stretch">
@@ -173,10 +242,12 @@ const EditEventForm = () => {
 
 
                 <Button type="submit" colorScheme="blue" size="lg" width="full">Update Event</Button>
-                <button onClick={handleGoBack}>Go Back</button>
+                
                 </VStack>
                 </form>
             </Box>
+            </Box>
+
     );
 };
 

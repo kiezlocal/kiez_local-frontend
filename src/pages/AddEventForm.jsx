@@ -73,6 +73,10 @@ useEffect(() => {
 
 
 return(
+    <Box position="relative">
+    <Box position="absolute" top="10px" left="10px">
+    <Button onClick={handleGoBack} colorScheme="teal" ml="10px">Go back</Button>
+</Box>
 <Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
             <form onSubmit={handleSubmit}>
                 <Heading mb={6} size="lg">Add Event's Information</Heading>
@@ -189,9 +193,10 @@ return(
                     <Button type="submit" colorScheme="blue" size="lg" width="full">
                         Add Event
                     </Button>
-                    <button onClick={handleGoBack}>Go back</button>
+                    
                 </VStack>
             </form>
+        </Box>
         </Box>
 )
 

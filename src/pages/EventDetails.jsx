@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import {
   Card,
@@ -19,6 +19,7 @@ import {
 const EventDetail = () => {
   const { eventId } = useParams();
   const [event, setEvent] = useState(null);
+  const navigate = useNavigate();
 
   const handleGoBack = () => {
     window.history.back();
@@ -47,6 +48,7 @@ const EventDetail = () => {
 
   return (
     <Container maxW="8xl">
+      <Button onClick={handleGoBack} ml="10px" mt="20px">Go Back</Button>
       <Center bg="white" h="600px" color="gray">
         <Card
           direction={{ base: "column", sm: "row" }}
@@ -77,12 +79,12 @@ const EventDetail = () => {
                 </Box>{" "}
                 {new Date(event.date).toLocaleString()}
               </Text>
-              {/* kiez: eventKiez ? eventKiez.kiez : "Unknown Kiez"
-              <Text py="2">
+             {/* kiez: eventKiez ? eventKiez.kiez : "Unknown Kiez" */}
+             {/* <Text py="2">
                 <Box as="span" fontWeight="bold">
                   Kiez:
                 </Box>{" "}
-                {event.kiez.kiezName}
+                {event.kiez ? event.kiez.kiezName : "Unknown Kiez"}
               </Text> */}
 
               <Text py="2">
@@ -97,7 +99,7 @@ const EventDetail = () => {
                 </Box>{" "}
                 {event.description}
               </Text>
-              <Text py="4">
+              <Text py="2" mb="10px">
   <Box as="span" fontWeight="bold">
     Website:
   </Box>{" "}
@@ -106,7 +108,7 @@ const EventDetail = () => {
               <Button variant="solid" colorScheme="blue" onClick={(e) => { e.stopPropagation(); navigate(`/events/${event._id}/edit`); }} mr="4" > Edit </Button>
                   <Button variant="ghost" colorScheme="blue" onClick={(e) => { e.stopPropagation(); onDelete(event._id); }} mr="4" > Delete </Button>              <p> </p>
                   <Box mt="4">
-          <Button onClick={handleGoBack}>Go Back</Button>
+          
         </Box>
             </CardBody>
           </Stack>

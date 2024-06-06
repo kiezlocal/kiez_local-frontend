@@ -12,7 +12,7 @@ import {
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon } from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon} from "@chakra-ui/icons";
 
 
 function Navbar() {
@@ -29,7 +29,7 @@ function Navbar() {
       <Flex
         bg={"white"}
         color={"gray.600"}
-        minH={"60px"}
+        minH={"40px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
@@ -102,7 +102,7 @@ function Navbar() {
               <Button variant="ghost" onClick={handleLogout}>
                 Logout
               </Button>
-              <Text>{user && user.name}</Text>
+             <Text>{user && user.name}</Text>
             </>
           ) : (
             <>
