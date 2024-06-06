@@ -143,8 +143,14 @@ function handleInputTime(e) {
 return (
     <ChakraProvider theme={theme}>
         <Box as="form" onSubmit={handleSubmitSearch} p={10} m={4} mt={0} boxShadow='md'>
-            <Flex align="center" justify="center" mb={4}>
-                <Box mr={10}> 
+            <Flex
+            direction={{ base: 'column', md: 'row' }}
+            align="center"
+            justify="center"
+            mb={4}
+            gap={2}
+            wrap="wrap">
+                <Box  mb={4} w={{ base: '100%', md: 'auto' }}>
                     <FormLabel htmlFor="category">Category</FormLabel>
                     <Select id="category-select" value={searchInfo.category} onChange={handleInputCategory} placeholder='All' w={[200, 250, 300]}  borderColor='gray.400' backgroundColor="white">
                         <option value="Music">Music</option>
@@ -159,7 +165,7 @@ return (
                     </Select>
                 </Box>
 
-                <Box mr={10}>
+                <Box mb={4} w={{ base: '100%', md: 'auto' }}>
                     <FormLabel htmlFor="kiez-select">Neighbourhood</FormLabel>
                     <Select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez} placeholder='All' w={[200, 250, 300]} borderColor='gray.400' backgroundColor="white">
                         <option value="Pankow">Pankow</option>
@@ -177,7 +183,7 @@ return (
                     </Select>
                 </Box>
 
-                <Box mr={1}>
+                <Box mb={4} w={{ base: '100%', md: 'auto' }}>
                     <FormLabel htmlFor="time-select">Time</FormLabel>
                     <Select id="time-select" value={searchInfo.time} onChange={handleInputTime} placeholder='All' w={[200, 250, 300]}  borderColor='gray.400' backgroundColor="white">
                         <option value="Next 3 days">Next 3 days</option>
@@ -186,8 +192,9 @@ return (
                     </Select>
                 </Box>
            
-                <Button type='submit' colorScheme='teal' size='md' alignSelf="flex-end" ml={10}>Search</Button>
             </Flex>
+            <Button type='submit' colorScheme='teal' size='md' alignSelf={{ base: 'center', md: 'flex-end' }}>Search</Button> {/* Przycisk poniżej Flex */}
+
         </Box>
     </ChakraProvider>
 );
