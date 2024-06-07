@@ -98,7 +98,7 @@ const LoginPage = () => {
           alt={'Login Image'}
           objectFit={'cover'}
           src={
-            'https://berlinstreetart.com/wp-content/uploads/2016/03/Klunkerkranich-Berlin-via-Facebook.jpg'
+            'https://images.unsplash.com/photo-1590516390022-67cd1106775a?q=80&w=1476&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
           }
         />
       </Flex>

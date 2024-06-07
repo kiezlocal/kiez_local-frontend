@@ -4,6 +4,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import katrinImage from '../assets/katrin.png';
 import magdaImage from '../assets/magdad.jpg';
 
+
 const About = () => {
   return (
     <Box className="about-container" p={6} display="flex" flexDirection="column" alignItems="center">
@@ -22,7 +23,7 @@ const About = () => {
 
       <Flex direction={["column", "row"]} justifyContent="space-around" maxWidth="70%" width="100%" spacing={4}>
         <Box className="about-person" textAlign="center" mb={[6, 0]} p={4} borderWidth="1px" borderRadius="lg" borderColor="gray.300" width={["100%", "45%"]}>
-          <Image src={magdaImage} alt="Magdalena" boxSize="150px" borderRadius="full" mb={4} mx="auto" />
+          <Image src={magdaImage} alt="Magdalena" boxSize="150px" borderRadius="full" mb={4} mx="auto" className='about-image' />
           <Box className="about-details">
             <Text className="about-created-by" fontWeight="bold">Created by:</Text>
             <Text className="about-last-name" fontSize="xl">Magdalena</Text>

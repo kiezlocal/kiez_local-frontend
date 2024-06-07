@@ -151,7 +151,7 @@ return (
             gap={2}
             wrap="wrap">
                 <Box  mb={4} w={{ base: '100%', md: 'auto' }}>
-                    <FormLabel htmlFor="category">Category</FormLabel>
+                    <FormLabel htmlFor="category" color="gray.600">Category</FormLabel>
                     <Select id="category-select" value={searchInfo.category} onChange={handleInputCategory} placeholder='All' w={[200, 250, 300]}  borderColor='gray.400' backgroundColor="white">
                         <option value="Music">Music</option>
                         <option value="Art">Art</option>
@@ -166,7 +166,7 @@ return (
                 </Box>
 
                 <Box mb={4} w={{ base: '100%', md: 'auto' }}>
-                    <FormLabel htmlFor="kiez-select">Neighbourhood</FormLabel>
+                    <FormLabel htmlFor="kiez-select" color="gray.600">Neighbourhood</FormLabel>
                     <Select id="kiez-select" value={searchInfo.kiez} onChange={handleInputKiez} placeholder='All' w={[200, 250, 300]} borderColor='gray.400' backgroundColor="white">
                         <option value="Pankow">Pankow</option>
                         <option value="Mitte">Mitte</option>
@@ -184,7 +184,7 @@ return (
                 </Box>
 
                 <Box mb={4} w={{ base: '100%', md: 'auto' }}>
-                    <FormLabel htmlFor="time-select">Time</FormLabel>
+                    <FormLabel htmlFor="time-select" color="gray.600">Time</FormLabel>
                     <Select id="time-select" value={searchInfo.time} onChange={handleInputTime} placeholder='All' w={[200, 250, 300]}  borderColor='gray.400' backgroundColor="white">
                         <option value="Next 3 days">Next 3 days</option>
                         <option value="Next 7 days">Next 7 days</option>
