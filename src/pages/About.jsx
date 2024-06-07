@@ -28,7 +28,7 @@ const About = () => {
             <Text className="about-last-name" fontSize="xl">Magdalena</Text>
             <Text className="about-role" color="gray.500">Developer</Text>
             <Text className="about-description" mt={2}>
-              Mauris eleifend rhoncus nibh, nec interdum lacus hendrerit vel. Duis varius ac felis sit amet lacinia. Praesent sit amet tempor quam, a consectetur purus. Morbi et eros ultricies, finibus urna vitae, faucibus risus.
+            Magdalena is a graduate of the Ironhack Bootcamp in Berlin. Through this intensive program, she gained valuable skills and experience in web development. She is passionate about creating community-driven platforms and enjoys contributing to vibrant, local events.
             </Text>
             <Flex justifyContent="center" mt={4}>
               <Link href="https://www.linkedin.com/in/magdalena-korgul/" isExternal mx={2}>
@@ -47,7 +47,7 @@ const About = () => {
             <Text className="about-last-name" fontSize="xl">Katrin</Text>
             <Text className="about-role" color="gray.500">Developer</Text>
             <Text className="about-description" mt={2}>
-              Mauris eleifend rhoncus nibh, nec interdum lacus hendrerit vel. Duis varius ac felis sit amet lacinia. Praesent sit amet tempor quam, a consectetur purus. Morbi et eros ultricies, finibus urna vitae, faucibus risus.
+            Katrin is a graduate of the Ironhack Bootcamp in Berlin. She has developed strong web development skills through the program and is enthusiastic about leveraging technology to enhance community engagement. Katrin is dedicated to connecting people through innovative solutions.
             </Text>
             <Flex justifyContent="center" mt={4}>
               <Link href="https://www.linkedin.com/in/katrin-winnen-27436137/" isExternal mx={2}>
