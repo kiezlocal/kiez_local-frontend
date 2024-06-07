@@ -191,18 +191,17 @@ return (
                         <option value="Next month">Next month</option>
                     </Select>
                 </Box>
-           
-            </Flex>
-            <Button
+           <Button
     type='submit'
     colorScheme='teal'
     size='md'
-    alignSelf={{ base: 'center', md: 'flex-start' }} 
-    mt={{ base: 4, md: 0 }} 
-    ml={{ md: 4 }} 
->
+    mt="15px"
+    ml={{ base: 0, md: 'top-end', lg: 'top-end' }} 
+    >
     Search
 </Button>
+            </Flex>
+            
 
         </Box>
     </ChakraProvider>
