@@ -193,7 +193,16 @@ return (
                 </Box>
            
             </Flex>
-            <Button type='submit' colorScheme='teal' size='md' alignSelf={{ base: 'center', md: 'flex-end' }}>Search</Button> {/* Przycisk poniżej Flex */}
+            <Button
+    type='submit'
+    colorScheme='teal'
+    size='md'
+    alignSelf={{ base: 'center', md: 'flex-start' }} 
+    mt={{ base: 4, md: 0 }} 
+    ml={{ md: 4 }} 
+>
+    Search
+</Button>
 
         </Box>
     </ChakraProvider>
