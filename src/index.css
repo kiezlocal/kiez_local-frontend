@@ -60,3 +60,7 @@ button:focus-visible {
   padding: 1rem;
   margin: 1rem;
 }
+
+body {
+  font-family: 'Roboto', sans-serif;
+}

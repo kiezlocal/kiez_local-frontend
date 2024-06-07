@@ -3,14 +3,17 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import './index.css'
 import { AuthProviderWrapper } from '../context/auth.context.jsx'
-import { ChakraProvider, extendTheme } from '@chakra-ui/react';
+import { ChakraProvider, extendTheme, GlobalStyle } from '@chakra-ui/react';
 
 
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 const theme = extendTheme({
-  fonts: {
-    heading: "Roboto, sans-serif",
-    body: "Roboto, sans-serif",
+  styles: {
+    global: {
+      body: {
+        fontFamily: "Roboto, sans-serif",
+      },
+    },
   },
 });
 
@@ -19,7 +22,7 @@ const rootElement = document.getElementById('root')
 ReactDOM.createRoot(rootElement).render(
 
   <React.StrictMode>
-    <ChakraProvider>
+    <ChakraProvider theme={theme}>
     <AuthProviderWrapper>
     <App />
     </AuthProviderWrapper>

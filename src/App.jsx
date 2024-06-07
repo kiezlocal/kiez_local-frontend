@@ -19,6 +19,7 @@ import AddEventForm from './pages/AddEventForm';
 import IsPrivate from './components/IsPrivate';
 import LocalKiezLogo from './assets/LocalKiez.svg';
 import PrivacyNotice from './pages/PrivacyNotice';
+import './index.css';
 
 
 function App() {

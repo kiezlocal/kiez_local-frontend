@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { Box, FormControl, FormLabel, Input, Select, Textarea, Button, VStack, Heading } from '@chakra-ui/react';
+import { Box, FormControl, FormLabel, Input, Select, Textarea, Button, VStack, Heading, Alert, AlertIcon, AlertTitle, AlertDescription, CloseButton } from '@chakra-ui/react';
 
 
 const AddEventForm = () => {
@@ -18,6 +18,7 @@ const AddEventForm = () => {
     });
 
 const navigate = useNavigate();
+const [alertStatus, setAlertStatus] = useState(null);
 
 const handleGoBack = () => {
     window.history.back();
@@ -35,7 +36,10 @@ const handleSubmit = (e) => {
     axios.post(`${import.meta.env.VITE_API_URL}/api/events`, eventData)
         .then(response => {
             console.log('Event created:', response.data);
-            navigate("/")
+            setAlertStatus('success');
+            setTimeout(() => {
+                navigate('/');
+            }, 2500);
         })
         .catch(error => {
             console.error("Error while creating an event", error);
@@ -43,10 +47,22 @@ const handleSubmit = (e) => {
                 console.error("Response data:", error.response.data);
                 console.error("Response status:", error.response.status);
                 console.error("Response headers:", error.response.headers);
+                setAlertStatus('error'); 
+                setTimeout(() => {
+                    setAlertStatus(null); 
+                }, 2500);
             } else if (error.request) {
                 console.error("Request data:", error.request);
+                setAlertStatus('error');
+                setTimeout(() => {
+                    setAlertStatus(null); 
+                }, 2500);
             } else {
                 console.error('Error message:', error.message);
+                setAlertStatus('error'); 
+                setTimeout(() => {
+                    setAlertStatus(null); 
+                }, 2500);
             }
         });
 };
@@ -78,7 +94,75 @@ return(
     <Box position="absolute" top="10px" left="10px">
     <Button onClick={handleGoBack} colorScheme="teal" ml="10px">Go back</Button>
 </Box>
-<Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg">
+<Box maxW="md" mx="auto" p={6} borderWidth={1} borderRadius="lg" boxShadow="lg" mt="20px">
+                {alertStatus === 'success' && ( // Dodaj to
+                    <Alert
+                        status='success'
+                        variant='subtle'
+                        flexDirection='column'
+                        alignItems='center'
+                        justifyContent='center'
+                        textAlign='center'
+                        height='200px'
+                        mb={4}
+                        position="fixed"
+                        bottom="10px"
+                        left="50%"
+                        transform="translateX(-50%)"
+                        width="90%"
+                        maxWidth="md"
+                        zIndex={9999}
+                    >
+                        <AlertIcon boxSize='40px' mr={0} />
+                        <AlertTitle mt={4} mb={1} fontSize='lg'>
+                            Event added successfully!
+                        </AlertTitle>
+                        <AlertDescription maxWidth='sm'>
+                            The event has been added. You will be redirected shortly.
+                        </AlertDescription>
+                        <CloseButton
+                            alignSelf='flex-start'
+                            position='relative'
+                            right={-1}
+                            top={-1}
+                            onClick={() => setAlertStatus(null)} // Dodaj to
+                        />
+                    </Alert>
+                )}
+                {alertStatus === 'error' && ( // Dodaj to
+                    <Alert
+                        status='error'
+                        variant='subtle'
+                        flexDirection='column'
+                        alignItems='center'
+                        justifyContent='center'
+                        textAlign='center'
+                        height='200px'
+                        mb={4}
+                        position="fixed"
+                        bottom="10px"
+                        left="50%"
+                        transform="translateX(-50%)"
+                        width="90%"
+                        maxWidth="md"
+                        zIndex={9999}
+                    >
+                        <AlertIcon boxSize='40px' mr={0} />
+                        <AlertTitle mt={4} mb={1} fontSize='lg'>
+                            Failed to add event!
+                        </AlertTitle>
+                        <AlertDescription maxWidth='sm'>
+                            There was an error adding the event. Please try again.
+                        </AlertDescription>
+                        <CloseButton
+                            alignSelf='flex-start'
+                            position='relative'
+                            right={-1}
+                            top={-1}
+                            onClick={() => setAlertStatus(null)} // Dodaj to
+                        />
+                    </Alert>
+                )}
             <form onSubmit={handleSubmit}>
                 <Heading mb={6} size="lg">Add Event's Information</Heading>
                 <VStack spacing={4} align="stretch">

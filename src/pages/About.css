@@ -45,10 +45,13 @@ SmallPages - for small pages: temrs of use, not found, etc. */
   }
   
   .about-image {
-    width: 150px;
-    height: 150px;
+    max-width: 150px;
+    max-height: 150px;
+    width: 100%;
+    height: auto;
     border-radius: 50%;
     margin-bottom: 10px;
+    object-fit: cover;
   }
   
   .about-details {
