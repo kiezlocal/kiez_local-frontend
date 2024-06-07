@@ -75,10 +75,10 @@ const KiezDetails = () => {
 
       
       <Center><Heading size="md" mb={4} position="center" mt="0" pt="0">Events in this neighbourhood</Heading></Center>
-      <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6">
+      <SimpleGrid columns={[1, 2, 3]} spacing="6" padding="6" mx="auto">
       {kiez.events && kiez.events.length > 0 ? (
             kiez.events.map(event => (
-          <Card key={event._id} borderWidth="1px" borderRadius="lg" overflow="hidden" maxW="2xs">
+          <Card key={event._id} borderWidth="1px" borderRadius="lg" overflow="hidden" maxW="2xs" mx="auto">
             {event.image && (
               <Image src={event.image} alt={event.name} borderRadius="lg" />
             )}
