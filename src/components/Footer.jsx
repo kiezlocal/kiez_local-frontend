@@ -6,8 +6,8 @@ const Footer = () => {
     return (
         <Box as="footer" bg={useColorModeValue('gray.50', 'gray.900')} color={useColorModeValue('gray.700', 'gray.200')}>
             <Container as={Stack} maxW={'6xl'} py={4} direction={{ base: 'column', md: 'row' }} spacing={4}
-                justify={{ base: 'center', md: 'space-between' }} align={{ base: 'center', md: 'center' }}>
-                <Box as="img" src="/src/assets/LocalKiez.svg" alt="LocalKiez Logo" w={100} h={100} />
+                justify={{ base: 'center', md: 'space-between' }} align={{ base: 'center', md: 'center' }}>                
+                <Box as="img" src={LocalKiezLogo} alt="LocalKiez Logo" w={100} h={100} />
                 <Stack direction={'row'} spacing={6}>
                     <Link to="/imprint">Imprint</Link>
                     <Link to="/privacy">Privacy Notice</Link>
